@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'snippets/meta.html' %}
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+
+  {% include 'snippets/css.html' %}
+
+</head>
+
+<body>
+  {% include 'snippets/navigation.html' %}
+ 
+ {% block content %}
+   
+ {% endblock content %}
+   
+  {% include 'snippets/javascript.html' %}
+
+</body>
+
+</html>

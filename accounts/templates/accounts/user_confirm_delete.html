@@ -1,0 +1,26 @@
+<!-- {% extends 'index.html' %}
+{% block content %}
+{% load static %}
+
+  <div class='container'>
+    <div class='row '>
+      <div class='col-lg-12 p-4'>
+
+          <h1 class="text-center mt-5 display-4">
+            Delete User <hr>
+          </h1>
+          <p class='text-center lead'> Are you sure you want to delete
+            {% if request.user.is_admin and object.username != request.user.username %}
+              {{object.username|capfirst}} ? </p>
+            {% else %}
+              Your account
+            {% endif %}
+          <form class='text-center' method='post'>
+            {% csrf_token %}
+            <button class='btn btn-dark mb-5'>Delete</button>
+          </form>
+      </div>
+    </div>
+    </div>
+
+{% endblock %} -->
