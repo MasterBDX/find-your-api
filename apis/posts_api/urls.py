@@ -1,9 +1,17 @@
 from rest_framework import routers
+from django.urls import path
 
-from .views import PostAPIViewSet
+from .views import (PostAPIViewSet,
+                    PostsSearchAPIView,
+                    PostsRandomAPIView)
 
 router = routers.DefaultRouter()
 router.register('',PostAPIViewSet,basename='posts_api')
 
 
-urlpatterns = list(router.urls)
+urlpatterns = [
+        path('search/',PostsSearchAPIView.as_view(),name='posts_search'),
+        path('random/',PostsRandomAPIView.as_view(),name='posts_random'),
+        ]
+
+urlpatterns += list(router.urls)

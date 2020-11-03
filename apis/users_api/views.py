@@ -98,10 +98,8 @@ class UsersSearchAPIView(ListAPIView):
 class UsersRandomAPIView(ListAPIView):
     queryset = UserApiModel.objects.order_by('?')
     serializer_class = UserApiSerializer
-    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
+    filter_backends =[filters.OrderingFilter]
     ordering_fields = ['id','username', 'email','full_name','birth_place',
-                     'phone_number','address','birthday']
-    search_fields = ['id','username', 'email','full_name','birth_place',
                      'phone_number','address','birthday']
     
     def get_queryset(self):

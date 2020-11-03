@@ -1,6 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.utils import timezone
 from .utils import get_thumnail_name
 
 GENDER = [('male','Male'),('female','Female')]
@@ -20,7 +21,7 @@ class UserApiModel(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name  = 'User Api'
+        verbose_name  = 'User'
         verbose_name_plural = 'Users Api'
 
     def __str__(self):
@@ -28,14 +29,34 @@ class UserApiModel(models.Model):
 
 
 class PostApiModel(models.Model):
-    author = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     overview = models.TextField()
     content = models.TextField()
-    thumbnail = models.ImageField(upload_to=get_thumnail_name)
-    published_at = models.DateTimeField(auto_now_add=True)
+    thumbnail = models.ImageField(upload_to=get_thumnail_name,blank=True,null=True)
+    published_at = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts Api'
 
     def __str__(self):
         return self.title
      
+
+class CommntApiModel(models.Model):
+    post_id = models.ForeignKey(PostApiModel,
+                                verbose_name="posts",
+                                on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    content = models.TextField()
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments Api'
+
+    def __str__(self):
+        return self.name 

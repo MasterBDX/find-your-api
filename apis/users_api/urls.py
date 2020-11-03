@@ -12,7 +12,7 @@ router.register('', UserAPIViewSet, basename='users')
 urlpatterns = list(router.urls)
 
 urlpatterns += [
-        path('search/users/',UsersSearchAPIView.as_view(),name='users_search'),
-        path('random/users/',UsersRandomAPIView.as_view(),name='users_random'),
+        path('search/',UsersSearchAPIView.as_view(),name='users_search'),
+        path('random/',UsersRandomAPIView.as_view(),name='users_random'),
 
         ]

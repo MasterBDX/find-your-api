@@ -3,9 +3,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
-SECRET_KEY = 'p6h2t2+i+2fh)8yfu%_d_#p17lopc@iwa4d*-rln^fi#p1*h_b'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-BASE_URL = 'http://website-name.com/'
+BASE_URL = os.environ.get('BASE_URL')
 
 DEBUG = False
 
