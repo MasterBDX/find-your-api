@@ -13,6 +13,8 @@ urlpatterns = [
     # APIs urls combination
     path('api/users/', include('apis.users_api.urls')),
     path('api/posts/', include('apis.posts_api.urls')),
+    path('api/comments/', include('apis.comments_api.urls')),
+    path('api/blog/', include('apis.blog_api.urls')),
 ]
 
 

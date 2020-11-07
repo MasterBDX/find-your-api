@@ -11,7 +11,7 @@ from .serializers import UserApiSerializer
 from ..models import UserApiModel
 from ..utils import check_ordering_kwarg
 
-
+                  
 class UserAPIViewSet(viewsets.ViewSet):
     '''  Viewset to handle GET POST PUT PATCH DELETE requests for
             my Users API 
@@ -98,9 +98,6 @@ class UsersSearchAPIView(ListAPIView):
 class UsersRandomAPIView(ListAPIView):
     queryset = UserApiModel.objects.order_by('?')
     serializer_class = UserApiSerializer
-    filter_backends =[filters.OrderingFilter]
-    ordering_fields = ['id','username', 'email','full_name','birth_place',
-                     'phone_number','address','birthday']
     
     def get_queryset(self):
         try:

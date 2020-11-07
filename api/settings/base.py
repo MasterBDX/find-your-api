@@ -155,9 +155,7 @@ CKEDITOR_CONFIGS = {
 }
 
 
-
-
-
+DEFAULT_DATETIME_FORMAT = '%-d %m, %Y'
 
 
 

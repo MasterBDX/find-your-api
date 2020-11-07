@@ -3,6 +3,16 @@ import string
 import os
 from django.utils.text import slugify
 
+
+def clean_pk(pk):
+    '''this function checks whether pk is an integer'''
+    try:
+        pk = int(pk)
+    except:
+        pk = None
+    return pk
+
+
 def check_ordering_kwarg(order,fields):
     try:
         order = order.strip()

@@ -29,12 +29,12 @@ class UserApiModel(models.Model):
 
 
 class PostApiModel(models.Model):
-    user_id = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
+    author_id = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     overview = models.TextField()
     content = models.TextField()
     thumbnail = models.ImageField(upload_to=get_thumnail_name,blank=True,null=True)
-    published_at = models.DateField()
+    published_at = models.DateField(blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -45,14 +45,16 @@ class PostApiModel(models.Model):
     def __str__(self):
         return self.title
      
-
-class CommntApiModel(models.Model):
+     
+class CommentApiModel(models.Model):
+    user_id = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
     post_id = models.ForeignKey(PostApiModel,
+                                related_name='comments',
                                 verbose_name="posts",
                                 on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
     content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Comment'
