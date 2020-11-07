@@ -12,13 +12,15 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column">
   {% include 'snippets/navigation.html' %}
  
  {% block content %}
    
  {% endblock content %}
-   
+ 
+ {% include 'snippets/footer.html' %}
+ 
   {% include 'snippets/javascript.html' %}
 
 </body>

@@ -1,6 +1,8 @@
 from rest_framework import generics
 from rest_framework import filters
 
+from django.shortcuts import get_object_or_404
+
 from ..models import PostApiModel
 
 from .pagination import BasicPagination
@@ -9,16 +11,18 @@ from .serializers import (
                           BlogPostDetialApiSerializer
                             )
 
+from ..comments_api.serializers import CommentApiSerializer
+
 
 class PaginatedPostsListAPIView(generics.ListAPIView):
     queryset = PostApiModel.objects.all()
     serializer_class = BlogPostApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     
-    ordering_fields = ['id','title','user_id','published_at']
+    ordering_fields = ['id','title','author_id','published_at']
     
-    search_fields = ['id','title','overview','content','user_id__email',
-                     'user_id__username','user_id__full_name']
+    search_fields = ['id','title','overview','content','author_id__email',
+                     'author_id__username','author_id__full_name']
     
     pagination_class = BasicPagination
     
@@ -30,10 +34,10 @@ class PostsListAPIView(generics.ListAPIView):
     serializer_class = BlogPostApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     
-    ordering_fields = ['id','title','user_id','published_at']
+    ordering_fields = ['id','title','author_id','published_at']
     
     search_fields = ['id','title','overview','content',
-                     'user_id__username','user_id__full_name']
+                     'author_id__username','author_id__full_name']
     
 
 class PostsDetailAPIView(generics.RetrieveAPIView):
@@ -44,7 +48,40 @@ class PostsDetailAPIView(generics.RetrieveAPIView):
 
 class AuthorPostsListAPIView(generics.ListAPIView):
     serializer_class = BlogPostApiSerializer
-
     def get_queryset(self):
         author_id = self.kwargs.get('pk')
-        return PostApiModel.objects.filter(user_id__id=author_id)
+        return PostApiModel.objects.filter(author_id__id=author_id)
+
+
+class PostCommentsListAPIView(generics.ListAPIView):
+    serializer_class = CommentApiSerializer
+    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = [
+                       'id','post_id__title',
+                       'created_at','user_id__username',
+                       'user_id__full_name',
+                       ]
+    search_fields = ['id','post_id__title',
+                     'content','created_at',
+                     'user_id__full_name',
+                     'user_id__username',
+                     'user_id__email']
+                     
+    def get_queryset(self):
+        post_id = self.kwargs.get('pk')
+        return get_object_or_404(PostApiModel,id=post_id).comments.all()
+    
+
+class PostCommentDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = CommentApiSerializer
+    
+    def get_queryset(self):
+        post_id = self.kwargs.get('pk')
+        return get_object_or_404(PostApiModel,id=post_id).comments.all()
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        comment_id = self.kwargs.get('comment_id')
+        obj = get_object_or_404(queryset, id=comment_id)
+        self.check_object_permissions(self.request, obj)
+        return obj

@@ -3,20 +3,20 @@ from django.utils.timesince import timesince
 
 from ..models import UserApiModel,PostApiModel,CommentApiModel
 from ..users_api.serializers import ShortUserApiSerialzer
+from ..comments_api.serializers import CommentApiSerializer
 
 
-
-class PostCommentsSerialzer(serializers.ModelSerializer):
-    created_at = serializers.SerializerMethodField()
-    class Meta:
-        model = CommentApiModel
-        fields = ['name','email','content','created_at']
+# class PostCommentsSerialzer(serializers.ModelSerializer):
+#     created_at = serializers.SerializerMethodField()
+#     class Meta:
+#         model = CommentApiModel
+#         fields = ['name','email','content','created_at']
     
-    def get_created_at(self,obj):
-        return obj.created_at.strftime('%-d %m, %Y')
+#     def get_created_at(self,obj):
+#         return obj.created_at.strftime('%-d %m, %Y')
     
-    def get_timesince(self,obj):
-        return timesince(obj.created_at)
+#     def get_timesince(self,obj):
+#         return timesince(obj.created_at)
 
 class BlogPostApiSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField()
@@ -47,7 +47,7 @@ class BlogPostApiSerializer(serializers.ModelSerializer):
         return timesince(obj.published_at)
 
     def get_author(self,obj):
-        return ShortUserApiSerialzer(instance=obj.user_id).data
+        return ShortUserApiSerialzer(instance=obj.author_id).data
     
     
 class BlogPostDetialApiSerializer(serializers.ModelSerializer):
@@ -79,8 +79,8 @@ class BlogPostDetialApiSerializer(serializers.ModelSerializer):
         return timesince(obj.published_at)
 
     def get_author(self,obj):
-        return ShortUserApiSerialzer(instance=obj.user_id).data
+        return ShortUserApiSerialzer(instance=obj.author_id).data
     
     def get_comments(self,obj):
-        return PostCommentsSerialzer(obj.comments.all(),many=True).data
+        return CommentApiSerializer(obj.comments.all(),many=True).data
 

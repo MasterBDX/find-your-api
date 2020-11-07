@@ -9,10 +9,9 @@ app_name = 'users_api'
 router = DefaultRouter()
 router.register('', UserAPIViewSet, basename='users')
 
-urlpatterns = list(router.urls)
 
-urlpatterns += [
+urlpatterns = [
         path('search/',UsersSearchAPIView.as_view(),name='users_search'),
         path('random/',UsersRandomAPIView.as_view(),name='users_random'),
-
         ]
+urlpatterns += list(router.urls)

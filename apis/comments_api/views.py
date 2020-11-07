@@ -85,6 +85,11 @@ class CommentsSearchAPIView(ListAPIView):
     queryset = CommentApiModel.objects.all()
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = [
+                       'id','post_id__title',
+                       'created_at','user_id__username',
+                       'user_id__full_name',
+                       ]
     search_fields = ['id','post_id__title',
                      'content','created_at',
                      'user_id__full_name',
