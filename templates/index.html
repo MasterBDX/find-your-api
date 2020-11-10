@@ -12,17 +12,22 @@
 
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column sticky-footer-wrapper">
   {% include 'snippets/navigation.html' %}
  
+  <main class="flex-fill">
  {% block content %}
    
  {% endblock content %}
- 
+</main>
  {% include 'snippets/footer.html' %}
  
   {% include 'snippets/javascript.html' %}
-
+  
+  {% block js %}
+    
+  {% endblock  %}
+    
 </body>
 
 </html>

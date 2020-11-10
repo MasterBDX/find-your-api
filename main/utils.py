@@ -27,3 +27,10 @@ def unique_slug_generator(instance, new_slug=None):
 
 
 
+def get_image_name(title,image_name):
+    slug_title = slugify(title)
+    imgName,imgExt = os.path.splitext(image_name)
+    random_str = random_string_generator(size=6)
+    img_name = slug_title + '-' + random_str + imgExt
+    img_path = os.path.join('main_images',img_name)
+    return img_path

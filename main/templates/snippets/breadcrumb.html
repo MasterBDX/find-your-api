@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'main:home' %}">
+          Home</a>
+    </li>
+      <li class="breadcrumb-item"><a href="{% url 'main:list' %}">
+          Resources</a>
+        </li>
+        {% if api %}
+      <li class="breadcrumb-item active" aria-current="page">
+          
+          <a href="{{api.get_absolute_url}}">
+            {{api.name}} Api Guide
+        </a>
+       </li>
+       {% endif %}
+    </ol>
+  </nav>

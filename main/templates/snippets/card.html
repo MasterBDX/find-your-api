@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header">
+     API Guide
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{api.name|capfirst}} API Guide</h5>
+      <p class="card-text">
+        {{api.overview}}  
+      </p>
+      <a href="{% url 'main:detail' slug=api.slug %}" class="btn btn-primary">
+        View Guide</a>
+    </div>
+  </div>

@@ -1,19 +1,80 @@
-html,
-body {
-  height: 100%;
+/* Global Styles */
+body{
+  background-color: #7461FF08;
+  
+}
+.second-section .divider{
+  margin: 0 0 35px 0;
+}
+.divider{
+  height: 15px;
+  background: #343a40;
+  margin: 30px 0;
 }
 
-#page-content {
-  flex: 1 0 auto;
+/* breadcrumb */
+
+.breadcrumb li::before{
+  color:#6c757d7a !important;
+}
+.breadcrumb li a{
+  color:#343a40;
+  transition: all ease .3s;
+  -webkit-transition: all ease .3s;
+  -moz-transition: all ease .3s;
+  -o-transition: all ease .3s;
 }
 
-#sticky-footer {
-  flex-shrink: none;
+
+.breadcrumb li a:hover{
+  text-decoration: none;
+  color: #0e0f11;;
 }
 
-/* Other Classes for Page Styling */
+/* Detail Section */
+.detail-section .row  h1{
+  
+  display: inline-block;
+  padding-bottom: 7px;
+}
 
-body {
-  background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
+.detail-section .row  pre code 
+{
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1.1em;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+
+/* Footer Styles  */
+body, .sticky-footer-wrapper {
+  min-height:100vh;
+}
+
+.flex-fill {
+  flex:1 1 auto;
+}
+
+/* Home Page */
+
+.second-section{
+  letter-spacing: 1px;
+  line-height: 1.7em;
+}
+.third-section pre{
+  margin-bottom: -10px;
+}
+.third-section pre code{
+  font-size: 1.2rem;
+  border-radius: 13px;
+}
+/* Home Page Header */
+
+.masthead {
+  height: 100vh;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'phonenumber_field',
+    'crispy_forms',
 
     # my apps 
     'accounts',
@@ -141,7 +142,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
          'extraPlugins': 'codesnippet',
         'tabSpaces': 4,
-        
+        'codeSnippet_theme': 'railscasts',
         
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
         # 'height': 291,
@@ -157,5 +158,5 @@ CKEDITOR_CONFIGS = {
 
 DEFAULT_DATETIME_FORMAT = '%-d %m, %Y'
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
