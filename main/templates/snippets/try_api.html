@@ -1,0 +1,38 @@
+<section id="try-api" class="try-api">
+      <div id="error-msg" class="col-md-6 m-auto"> 
+       
+      </div>
+      <div class="form-group col-md-6 m-auto">
+        <label for="exampleInputEmail1">Resource Url</label>
+        <input type="url" class="form-control" 
+                id="try-api-input" aria-describedby="urlTest" 
+                placeholder="Enter resource url for example : http://127.0.0.1:8000/ ">
+        <small id="emailHelp" class="form-text text-muted">
+          Please press Enter  after typing the url.
+        </small>
+      </div>
+     
+   
+    <pre class=" language-javascript">
+      <code>
+        fetch(<span class="hljs-string">'<span id='url-holder'>http://127.0.0.1:8000/</span>'</span>)
+        .then(response => response.json())
+        .then(json => console.log(json))
+      </code>
+    </pre>
+    <button  id='run-btn' class="btn btn-dark"> 
+      Run Script
+    </button>
+    <pre class=" language-javascript mt-3">
+      <code id="json-holder">
+        
+        {}
+
+      </code>
+    </pre>
+    
+    <button id="copy-btn" class="btn btn-dark">
+      copy
+    </button>
+  </section>
+  

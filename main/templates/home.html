@@ -41,24 +41,10 @@
 <section class="third-section">
   <div class="divider"></div>
     <div class="container mb-5">
-          <h3 class="text-center">
+          <h2 class="text-center mb-5" >
             Give it a shot 
-          </h3>
-          <pre class=" language-javascript">
-            <code>
-              fetch(<span>'http://127.0.0.1:8000/'</span>)
-              .then(response => response.json())
-              .then(json => console.log(json))
-            </code>
-          </pre>
-          <button class="btn btn-dark"> 
-            Run Script
-          </button>
-          <pre class=" language-javascript mt-3">
-            <code>
-              {}
-            </code>
-          </pre>
+          </h2>
+         {% include 'snippets/try_api.html' %}
       </div>
   </section>
 
