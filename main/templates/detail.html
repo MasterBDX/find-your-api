@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block title %}
-{{api.name}} API Guide 
+{{guide.name}} API Guide 
 {% endblock  %}
   
 {% block content %}
@@ -12,12 +12,12 @@
       <div class="row mt-5" >
         <div class="col-lg-10 m-auto text-center">
           <h1 class="">
-            {{api.name}} API Guide 
+            {{guide.name}} API Guide 
           </h1>
         </div>
         <div class="col-lg-10 m-auto">
           <p class="lead mt-4">
-              {{api.safe_content}} 
+              {{guide.safe_content}} 
           </p>
         
         </div>
@@ -25,6 +25,8 @@
           <hr />
           <h2 class="text-center mb-3">Try it for yourself</h2>
           {% include 'snippets/try_api.html' %}
+          <hr />
+          {% include 'snippets/suggestion.html' %}
         </div>
       </div>
     </div>

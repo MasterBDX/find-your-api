@@ -1,0 +1,29 @@
+{% load crispy_forms_tags %}
+<div class="row " id='suggestion'>
+    {% if messages %}
+    <div class="col-md-10 m-auto" >
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show " role="alert">
+                {{ message|safe}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+         {% endfor %}
+    </div>
+    {% endif %}
+    <div class="col-md-10 m-auto" >
+        <h2 class="text-center mb-4 mt-4">
+            Send me your suggestion
+        </h2>
+    </div>
+    <div class="col-md-10 m-auto">
+        <form method="post" action="{% url 'main:suggestion-add' slug=guide.slug %}" class="uniForm">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-dark mt-4 mb-4">
+                Send
+            </button>
+        </form>
+    </div>
+</div>

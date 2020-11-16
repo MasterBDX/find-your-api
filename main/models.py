@@ -44,3 +44,15 @@ class ApiGuide(models.Model):
     
     def get_absolute_url(self):
         return reverse('main:detail',kwargs={'slug':self.slug})
+
+
+class Suggestion(models.Model):
+    name = models.CharField(max_length=255)
+    email  = models.EmailField()
+    suggestion = models.TextField()
+    read = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
