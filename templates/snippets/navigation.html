@@ -1,4 +1,8 @@
   <!-- Navigation -->
+  {% url 'main:home' as home %}
+  {% url 'main:contact' as contact %}
+  {% url 'main:list' as list %}
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
       <a class="navbar-brand" href="{% url 'main:home' %}">MasterBDX API</a>
@@ -7,23 +11,40 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'main:home' %}">Home
+          <li class="nav-item 
+            {% if request.path == home %}
+              active
+            {% endif %}
+          ">
+            <a class="nav-link" href="{% url 'main:home' %}">
+              <i class="fas fa-home fa-lg"></i> Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'main:list' %}">Resources List</a>
+          <li class="nav-item 
+            {% if request.path == list %}
+              active
+            {% endif %}
+        ">
+            <a class="nav-link" href="{% url 'main:list' %}">
+              <i class="fas fa-th-list fa-lg"></i> Resources List</a>
           </li>
           {% if request.user.is_authenticated %}
             {% if request.user.is_admin %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                  <a class="nav-link" href="{% url 'admin:index' %}">
+                    <i class="fas fa-user-cog fa-lg"></i> Admin</a>
                 </li>
             {% endif %}
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'main:contact' %}">Contact</a>
+          <li class="nav-item 
+            {% if request.path == contact %}
+              active
+            {% endif %}
+            ">
+            <a class="nav-link" href="{% url 'main:contact' %}">
+              <i class="fas fa-envelope fa-lg"></i> Contact
+            </a>
           </li>
         </ul>
       </div>

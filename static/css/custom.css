@@ -11,6 +11,11 @@ body{
   background: #343a40;
   margin: 30px 0;
 }
+/* NavBar */
+
+.nav-item{
+  margin-left:10px;
+}
 
 /* breadcrumb */
 
