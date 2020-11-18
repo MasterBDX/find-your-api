@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% load static %}
+{% block title %}
+  Home
+{% endblock  %}
+  
+{% block content %}
+<header class="masthead" style="background-image: url({{object.validated_image_url}});">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12 text-center">
+          <h1 class="font-weight-light">
+            Contact Us
+          </h1>
+          <p class="lead">
+            {% if object.gmail %}
+            <i class="fab fa-google fa-lg"></i>
+            <a class="btn btn-link" href="mailto:{{object.gmail}}">
+               {{object.gmail}}
+            </a>
+              {% endif %}
+              <br />
+            {% if object.outlook %}
+            <i class="fab fa-microsoft fa-lg"></i>
+            <a class="btn btn-link" href="mailto:{{object.gmail}}">
+                {{object.outlook}}
+            </a>
+              {% endif %}
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+  
+{% endblock content %}
+    
+
+{% block js %}
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+  

@@ -49,10 +49,30 @@ class ApiGuide(models.Model):
 class Suggestion(models.Model):
     name = models.CharField(max_length=255)
     email  = models.EmailField()
+    subject = models.CharField(max_length=255)
     suggestion = models.TextField()
     read = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.name + ' Suggestion'
+
+
+class Contact(models.Model):
+    gmail = models.EmailField(null=True,blank=True)
+    outlook = models.EmailField(null=True,blank=True)
+    image = models.ImageField(upload_to=get_image_name,blank=True,null=True)
+    
+    class Meta:
+        verbose_name = 'Contact Info'
+        verbose_name_plural = 'Contact Info'
+    def __str__(self):
+        return self.gmail or self.outlook or 'Empty Email Fields'
+    
+    def validated_image_url(self):
+        try:
+            image_url = self.image.url
+        except:
+            image_url = None
+        return image_url

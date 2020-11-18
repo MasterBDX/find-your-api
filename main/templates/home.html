@@ -6,6 +6,7 @@
 {% endblock  %}
   
 {% block content %}
+{% if object %}
 <header class="masthead" style="background-image: url({{object.validated_image_url}});">
   <div class="container h-100">
     <div class="row h-100 align-items-center">
@@ -21,10 +22,12 @@
     </div>
   </div>
 </header>
-
+{% endif %}
 <!-- Page Content -->
 <section class="second-section">
+  {% if object %}
   <div class="divider"></div>
+ {% endif %}
   <div class="container">
     <div class="row">
       <div class="col-md-10 m-auto">
@@ -39,8 +42,10 @@
  
 </section>
 <section class="third-section">
-  <div class="divider"></div>
-    <div class="container mb-5">
+  {% if object %}
+    <div class="divider"></div>
+ {% endif %}
+    <div class="container mb-5 mt-3">
           <h2 class="text-center mb-5" >
             Give it a shot 
           </h2>
