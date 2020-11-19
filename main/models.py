@@ -10,7 +10,7 @@ from .utils import get_image_name
 class SiteInfo(models.Model):
     title = models.CharField(max_length=255)
     overview = models.TextField(null=True,blank=True)
-    about  = RichTextField()
+    about  = RichTextField(null=True,blank=True)
     image = models.ImageField(upload_to=get_image_name,blank=True,null=True)
 
     def __str__(self):
