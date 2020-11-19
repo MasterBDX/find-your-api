@@ -8,14 +8,13 @@ from ckeditor.fields import RichTextField
 from .utils import get_image_name
 
 class SiteInfo(models.Model):
-    title = models.CharField(max_length=255,
-                                  null=True,blank=True)
+    title = models.CharField(max_length=255)
     overview = models.TextField(null=True,blank=True)
     about  = RichTextField()
     image = models.ImageField(upload_to=get_image_name,blank=True,null=True)
 
     def __str__(self):
-        return self.title
+        return self.title 
     
     def safe_about_content(self):
         return mark_safe(self.about)

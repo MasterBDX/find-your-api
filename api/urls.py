@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/defender/', include('defender.urls')), # defender admin
     path('', include('main.urls',namespace='main')),
  
     # APIs urls combination

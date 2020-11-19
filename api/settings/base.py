@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'phonenumber_field',
     'crispy_forms',
+    'defender',
 
     # my apps 
     'accounts',
@@ -39,6 +40,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'defender.middleware.FailedLoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -57,6 +59,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'api.context.site_name',
             ],
         },
     },
@@ -160,3 +163,6 @@ DEFAULT_DATETIME_FORMAT = '%-d %m, %Y'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+# Defender Settings
+DEFENDER_LOGIN_FAILURE_LIMIT = 5

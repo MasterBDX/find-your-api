@@ -36,3 +36,8 @@ EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Defender Settings
+
+DEFENDER_REDIS_URL = os.environ.get('REDIS_URL')
