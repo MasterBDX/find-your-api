@@ -1,14 +1,21 @@
 
 from django.contrib import admin
 from django.urls import path,include
+from django.contrib.sitemaps.views import sitemap
 
 from django.conf import settings
 from django.conf.urls.static import static
 
+from api.sitemaps import GuidesSitemap,StaticSitemap
+
+sitemaps = {'guides':GuidesSitemap,
+            'static':StaticSitemap}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/defender/', include('defender.urls')), # defender admin
+    path('sitemap.xml',sitemap,{'sitemaps':sitemaps}),
+    
     path('', include('main.urls',namespace='main')),
  
     # APIs urls combination
