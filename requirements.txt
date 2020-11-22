@@ -8,6 +8,7 @@ django-hosts==4.0
 django-js-asset==1.2.2
 django-phonenumber-field==5.0.0
 djangorestframework==3.12.1
+gunicorn==20.0.4
 Markdown==3.3.2
 phonenumbers==8.12.11
 Pillow==8.0.0
