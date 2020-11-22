@@ -4,11 +4,13 @@ from main.models import SiteInfo
 from .context import site_name
 
 class ContextTestCase(TestCase):
+    
     def setUp(self):
         self.c = Client()
         self.obj = SiteInfo.objects.create(title='MasterBDX')
 
     
     def test_context_site_name(self):
+        ''' Test site name context whether filed == title  '''
         request = self.c.get('/')
         self.assertEqual(self.obj.title,site_name(request).get('title'))
