@@ -10,7 +10,12 @@ BASE_URL = os.environ.get('BASE_URL')
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['findyourapi.herokuapp.com',
+                 'www.findyourapi.herokuapp.com',
+                 'masterbdx.findyourapi.herokuapp.com',
+                 'findyourapi.com',
+                 'www.findyourapi.com',
+                 'masterbdx.findyourapi.com']
 
 MAIN_EMAIL = os.environ.get('MAIN_EMAIL')
 ADMINS = [('masterbdx', MAIN_EMAIL)]
