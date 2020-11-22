@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'defender',
+    'django_hosts',
 
     # my apps 
     'accounts',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'defender.middleware.FailedLoginMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 
@@ -170,3 +173,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Defender Settings
 DEFENDER_LOGIN_FAILURE_LIMIT = 5
+
+# Django Hosts Config
+ROOT_HOSTCONF = 'api.hosts'
+DEFAULT_HOST = 'www'
