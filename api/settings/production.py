@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -41,3 +42,5 @@ EMAIL_USE_TLS = True
 # Defender Settings
 
 DEFENDER_REDIS_URL = os.environ.get('REDIS_URL')
+
+django_heroku.settings(locals())
