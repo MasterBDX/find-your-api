@@ -1,6 +1,6 @@
 import os
 import django_heroku
-from .base import MIDDLEWARE
+from .base import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -45,7 +45,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-# Defender Settings
+# # Defender Settings
 
 DEFENDER_REDIS_URL = os.environ.get('REDIS_URL')
 
