@@ -9,6 +9,7 @@ include/
 pip-selfcheck.json
 
 api/settings/local.py
+api/settings/production_test.py
 
 # Django related 
 # src/<yourproject>/settings/local.py
