@@ -25,7 +25,7 @@
 {% endif %}
 <!-- Page Content -->
 <section class="second-section">
-  {% if object %}
+  {% if object.content %}
   <div class="divider"></div>
  {% endif %}
   <div class="container">
@@ -42,11 +42,11 @@
  
 </section>
 <section class="third-section">
-  {% if object %}
+  {% if object.content %}
     <div class="divider"></div>
  {% endif %}
     <div class="container mb-5 mt-3">
-          <h2 class="text-center mb-5" >
+          <h2 class="text-center mb-3" >
             Give it a shot 
           </h2>
          {% include 'snippets/try_api.html' %}

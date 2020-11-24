@@ -12,6 +12,7 @@ class SiteInfo(models.Model):
     overview = models.TextField(null=True,blank=True)
     about  = RichTextField(null=True,blank=True)
     image = models.ImageField(upload_to=get_image_name,blank=True,null=True)
+    portfolio_url = models.URLField(blank=True,null=True)
 
     def __str__(self):
         return self.title 
