@@ -36,8 +36,8 @@ class PostAPIViewSet(viewsets.ViewSet):
         return Response(serialized_data.data)
 
     def create(self, request):
-        last_user = PostApiModel.objects.values('id').last()
-        obj_id = last_user.get('id') + 1
+        last_post = PostApiModel.objects.values('id').last()
+        obj_id = randint(last_post.get('id') + 1,100000)
         serialized_data = PostAddApiSerializer(data=request.data)
         if serialized_data.is_valid():
             return Response({'id':obj_id,

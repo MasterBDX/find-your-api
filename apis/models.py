@@ -7,8 +7,8 @@ from .utils import get_thumnail_name
 GENDER = [('male','Male'),('female','Female')]
 
 class UserApiModel(models.Model):
-    first_name = models.CharField(max_length=255,blank=True,null=True)
-    last_name = models.CharField(max_length=255,blank=True,null=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     full_name = models.CharField(max_length=255,blank=True,null=True)
     username = models.CharField(max_length=255,blank=True,null=True)
     gender = models.CharField(max_length=255,choices=GENDER)

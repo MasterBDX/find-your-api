@@ -7,7 +7,7 @@ from .views import (HomeView, APIListView, APIDetialView,
 app_name = 'main'
 urlpatterns = [
     path('', HomeView.as_view(),name="home" ),
-    path('guide/', APIListView.as_view(),name="list" ),
+    path('guides/', APIListView.as_view(),name="list" ),
     path('guide/<slug:slug>/api/', APIDetialView.as_view(),name="detail" ),
     path('guide/<slug:slug>/suggestion/add/',
           AddSuggestionView.as_view(),name="suggestion-add" ),

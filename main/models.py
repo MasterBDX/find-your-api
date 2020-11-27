@@ -10,7 +10,7 @@ from .utils import get_image_name
 class SiteInfo(models.Model):
     title = models.CharField(max_length=255)
     overview = models.TextField(null=True,blank=True)
-    about  = RichTextField(null=True,blank=True)
+    main_content  = RichTextField(null=True,blank=True)
     image = models.ImageField(upload_to=get_image_name,blank=True,null=True)
     portfolio_url = models.URLField(blank=True,null=True)
 
@@ -18,7 +18,7 @@ class SiteInfo(models.Model):
         return self.title 
     
     def safe_about_content(self):
-        return mark_safe(self.about)
+        return mark_safe(self.main_content)
     
     def validated_image_url(self):
         try:
@@ -37,7 +37,7 @@ class ApiGuide(models.Model):
 
 
     def __str__(self):
-        return self.name + ' api'
+        return self.name + ' API Guide '
     
     def safe_content(self):
         return mark_safe(self.content)

@@ -36,3 +36,9 @@ def get_thumnail_name(title,image_name):
     img_name = slug_title + '-' + random_str + imgExt
     img_path = os.path.join('posts_thumbnails',img_name)
     return img_path
+
+
+def update_object(obj,data):
+        for attr, value in data.items():
+            setattr(obj, attr, value)
+        return obj

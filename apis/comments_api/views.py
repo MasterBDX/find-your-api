@@ -37,7 +37,7 @@ class CommentAPIViewSet(viewsets.ViewSet):
 
     def create(self, request):
         last_comment = CommentApiModel.objects.values('id').last()
-        obj_id = last_comment.get('id') + 1      
+        obj_id = randint(last_comment.get('id') + 1,100000)      
         serializerd_data = CommentAddApiSerializer(data=request.data)
         if serializerd_data.is_valid():
             return Response({'id':obj_id,
