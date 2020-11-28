@@ -108,3 +108,8 @@ body, .sticky-footer-wrapper {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* Contact Us Styles */
+.contact .btn-link{
+  color:#212529 !important
+}

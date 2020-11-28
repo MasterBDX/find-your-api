@@ -22,13 +22,13 @@ class HomeView(TemplateView):
 
 class APIListView(ListView):
     context_object_name = 'apis'
-    queryset = ApiGuide.objects.all()
+    queryset = ApiGuide.objects.active()
     template_name = 'list.html'
 
 
 class APIDetialView(DetailView):
     context_object_name = 'guide'
-    queryset = ApiGuide.objects.all()
+    queryset = ApiGuide.objects.active()
     template_name = 'detail.html'
 
     def get_context_data(self, **kwargs):

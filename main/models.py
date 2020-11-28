@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from ckeditor.fields import RichTextField
 
+from .managers import APIGuideManager
 from .utils import get_image_name
 
 class SiteInfo(models.Model):
@@ -32,9 +33,15 @@ class ApiGuide(models.Model):
     slug = models.CharField(max_length=255,blank=True,null=True)
     overview = models.TextField(blank=True,null=True)
     content = RichTextField()
+    active = models.BooleanField(default = False)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    objects = APIGuideManager()
+
+    class Meta:
+        verbose_name = 'API Guide'
+        verbose_name_plural = 'API Guides'
 
     def __str__(self):
         return self.name + ' API Guide '

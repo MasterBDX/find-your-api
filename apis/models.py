@@ -1,7 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
-from django.utils import timezone
+from django.utils.timezone import now
 from .utils import get_thumnail_name
 
 GENDER = [('male','Male'),('female','Female')]
@@ -34,7 +34,7 @@ class PostApiModel(models.Model):
     overview = models.TextField()
     content = models.TextField()
     thumbnail = models.ImageField(upload_to=get_thumnail_name,blank=True,null=True)
-    published_at = models.DateField(blank=True,null=True)
+    published_at = models.DateField(default=now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

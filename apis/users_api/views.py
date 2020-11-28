@@ -74,10 +74,7 @@ class UserAPIViewSet(viewsets.ViewSet):
         return Response(serilaizerd_data.errors,status=400)
 
     def destroy(self, request, pk=None):
-        try:
-            pk = int(pk)
-        except:
-            pk = None
+        pk = clean_pk(pk)
         obj = get_object_or_404(UserApiModel,pk=pk)
         return Response("User has been deleted")
 
@@ -87,9 +84,7 @@ class UsersSearchAPIView(ListAPIView):
 
     queryset = UserApiModel.objects.all()
     serializer_class = UserApiSerializer
-    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['id','username', 'email','full_name','birth_place',
-                     'phone_number','address','birthday']
+    filter_backends =[filters.SearchFilter]
     search_fields = ['id','username', 'email','full_name','birth_place',
                      'phone_number','address','birthday']
     

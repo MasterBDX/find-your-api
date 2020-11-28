@@ -40,6 +40,7 @@ $(function(){
         if (validation){
             $('#error-msg').empty(errorMsg)
             $('#url-holder').text(value)
+            $(this).val('')
         }
         else{
             $('#error-msg').html(errorMsg)
@@ -84,7 +85,7 @@ $(function(){
         try {
           var successful = document.execCommand('copy');
           var msg = successful ? 'successful' : 'unsuccessful';
-          $(this).text('copied')
+          $(this).text('Copied')
             
         } catch (err) {
           console.error('Fallback: Oops, unable to copy', err);
@@ -95,24 +96,24 @@ $(function(){
         $('#copy-btn').click(fallbackCopyTextToClipboard)
 
       
-        const omar = ()=>{ fetch('http://127.0.0.1:8000/api/users/1/', {
-            method: 'PATCH',
-            body: JSON.stringify({
-                "first_name": "MasterBDX Modified 2", 
-                "last_name": "BD Modified 2",
-                "full_name": "Masterbdx Modified 2", //optional
-                "username": "Masterbdx Modified 2"
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-            })
-            .then((response) => response.json())
-            .then((json) => console.log(json))
-                    }
-                       
-                        console.log(omar())
-                })
+        const omar = ()=>{ 
+            fetch('http://127.0.0.1:8000/api/posts/')
+              .then((response) => response.json())
+              .then((json) => console.log(json))
+
+        }           
+
+        console.log(omar())
+
+        $('#clean-btn').click(function(e){
+            e.preventDefault()
+            $('#json-holder').text(`{}`)
+            
+            
+        })
+
+
+})
     
     
 
