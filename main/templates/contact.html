@@ -9,25 +9,26 @@
 <header class="masthead" style="background-image: url({{object.validated_image_url}});">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center contact">
           <h1 class="font-weight-light">
             Contact Us
           </h1>
-          <p class="lead contact">
             {% if object.gmail %}
+            <div>
             <i class="fab fa-google fa-lg"></i>
-            <a class="btn btn-link" href="mailto:{{object.gmail}}">
+            <a class="link" href="mailto:{{object.gmail}}">
                {{object.gmail}}
             </a>
               {% endif %}
-              <br />
+            </div>
             {% if object.outlook %}
+                <div>
             <i class="fab fa-microsoft fa-lg"></i>
-            <a class="btn btn-link" href="mailto:{{object.gmail}}">
+            <a class="link" href="mailto:{{object.gmail}}">
                 {{object.outlook}}
             </a>
               {% endif %}
-          </p>
+            </div>
         </div>
         
       </div>

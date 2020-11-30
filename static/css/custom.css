@@ -27,7 +27,9 @@ a{
 .nav-item{
   margin-left:10px;
 }
-.navbar-brand,
+.navbar-brand{
+  color:#ffffffde !important;
+}
 .nav-item i{
   color: #2dcc70 !important;
 }
@@ -109,7 +111,24 @@ body, .sticky-footer-wrapper {
   background-repeat: no-repeat;
 }
 
+.home-header{
+  color:#ffffffde;
+}
+
 /* Contact Us Styles */
-.contact .btn-link{
-  color:#212529 !important
+
+.contact div
+{
+  padding: 3px 13px 12px 10px;
+color: #FFF !important;
+}
+
+.contact{
+  color:#343a40;
+}
+
+.contact i
+{
+  margin-right: 10px;
+  color:#343a40;
 }
