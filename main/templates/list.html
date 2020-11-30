@@ -8,12 +8,19 @@ Resources List
 {% include 'snippets/breadcrumb.html' %}
   <div class="container">
     <div class="row mt-2">
+      {% if apis %}
       {% for api in apis %}
       <div class="col-md-11 mt-3 mb-4">
         {% include 'snippets/card.html' %}
       </div>
       
       {% endfor %}
+      {% else %}
+        <div class="col-md-12 mt-5 mb-5 text-center">
+          <h2>There are no guides yet</h2>
+          <p class="lead">soon will be added : )</p>
+        </div>
+      {% endif  %}
       <div class="w-100 mt-4"></div>
     </div>
   </div>
