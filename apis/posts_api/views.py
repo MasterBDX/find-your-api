@@ -15,6 +15,8 @@ from .utils import *
 from ..models import PostApiModel
 from ..utils import check_ordering_kwarg,clean_pk
 
+from ..vars import ALLOWED_POST_FIELDS
+
 class PostAPIViewSet(viewsets.ViewSet):
     '''  Viewset to handle GET POST PUT PATCH DELETE requests for
             my Posts API 
@@ -24,9 +26,9 @@ class PostAPIViewSet(viewsets.ViewSet):
             limit = int(request.GET.get('limit',None))
         except:
             limit = None
-        fields = ['id','title','published_at','author']
+        
         ordering = check_ordering_kwarg(request.GET.get('ordering'),
-                                        fields)               
+                                        ALLOWED_POST_FIELDS)               
                
         if ordering:
             queryset = PostApiModel.objects.order_by(ordering)

@@ -1,3 +1,9 @@
+/* Globals Vars */
+:root{
+  --myWhight:#FFFFFFDE;
+}
+
+
 /* Global Styles */
 body{
   background-color: #7461FF08;
@@ -111,7 +117,10 @@ body, .sticky-footer-wrapper {
   background-repeat: no-repeat;
 }
 
-.home-header h1{
+.home-header{
+  height: 60vh;
+}
+.home-header div h1{
   color:#ffffffde;
 }
 
@@ -119,16 +128,18 @@ body, .sticky-footer-wrapper {
 
 .contact div
 {
-  padding: 3px 13px 12px 10px;
-color: #FFF !important;
+  padding: 3px 13px 12px 10px;  
+  
 }
 
-.contact{
-  color:#343a40;
+.contact,
+.contact a{
+  color:var(--myWhight);
 }
 
 .contact i
 {
   margin-right: 10px;
-  color:#343a40;
+  color : var(--myWhight);
 }
+

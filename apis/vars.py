@@ -1,0 +1,1 @@
+ALLOWED_POST_FIELDS = ['id','title','published_at','author_id']
