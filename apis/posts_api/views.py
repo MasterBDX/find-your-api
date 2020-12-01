@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework import filters
+from rest_framework.authentication import  BasicAuthentication 
 
 from django.utils.timesince import timesince
 from django.conf import settings
@@ -10,10 +11,13 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import PostApiSerializer,PostAddApiSerializer
 
-from .utils import *
+from .utils import get_post_object
 
+from ..authentication import CsrfExemptSessionAuthentication
 from ..models import PostApiModel
-from ..utils import check_ordering_kwarg,clean_pk
+from ..utils import (check_ordering_kwarg,
+                     clean_pk,
+                     get_limit)
 
 from ..vars import ALLOWED_POST_FIELDS
 
@@ -21,15 +25,12 @@ class PostAPIViewSet(viewsets.ViewSet):
     '''  Viewset to handle GET POST PUT PATCH DELETE requests for
             my Posts API 
              '''
+    authentication_classes = (CsrfExemptSessionAuthentication,BasicAuthentication)
+
     def list(self, request):
-        try:
-            limit = int(request.GET.get('limit',None))
-        except:
-            limit = None
-        
+        limit = get_limit(request.GET)
         ordering = check_ordering_kwarg(request.GET.get('ordering'),
-                                        ALLOWED_POST_FIELDS)               
-               
+                                        ALLOWED_POST_FIELDS)                              
         if ordering:
             queryset = PostApiModel.objects.order_by(ordering)
         else:
@@ -38,12 +39,10 @@ class PostAPIViewSet(viewsets.ViewSet):
         return Response(serialized_data.data)
 
     def create(self, request):
-        last_post = PostApiModel.objects.values('id').last()
-        obj_id = randint(last_post.get('id') + 1,100000)
         serialized_data = PostAddApiSerializer(data=request.data)
         if serialized_data.is_valid():
-            return Response({'id':obj_id,
-                      **json_post_object(serialized_data.validated_data)})
+            data = PostApiSerializer(instance=get_post_object(serialized_data.validated_data)).data
+            return Response(data)
         return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):

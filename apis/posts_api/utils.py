@@ -1,20 +1,19 @@
-from ..users_api.serializers import ShortUserApiSerialzer
-
 from django.utils.timesince import timesince
-from django.conf import settings
-from django.utils import timezone
+from ..models import PostApiModel
+from django.utils.timezone import now
 
-def json_post_object(data):
-    author = ShortUserApiSerialzer(data['author_id']).data
-    published_at = data.get('published_at')
-    if not published_at:
-        published_at = timezone.now()
-       
-    return {
-            'author':author,
-            'title':data['title'],
-            'overview':data['overview'],
-            'content':data['content'],
-            'published_at':published_at.strftime(settings.DEFAULT_DATETIME_FORMAT),
-            'timesince':timesince(published_at)
-            }
+from random import randint
+
+def get_post_object(data):
+    '''Get  post object without saving it 
+        using passed data   
+    '''
+    last_post = PostApiModel.objects.values('id').last()
+    id_ = randint(last_post.get('id') + 1,100000)
+    obj = PostApiModel(id=id_,
+                       title=data['title'],
+                       overview=data['overview'],
+                       content=data['content'],
+                       author_id=data['author_id'],
+                       published_at=data.get('published_at',now()))
+    return obj

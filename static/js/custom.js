@@ -96,14 +96,14 @@ $(function(){
         $('#copy-btn').click(fallbackCopyTextToClipboard)
 
       
-        const omar = ()=>{ 
-            fetch('http://127.0.0.1:8000/api/posts/')
-              .then((response) => response.json())
-              .then((json) => console.log(json))
+        // const data = ()=>{ 
+        //     fetch('http://127.0.0.1:8000/api/posts/')
+        //       .then((response) => response.json())
+        //       .then((json) => console.log(json))
 
-        }           
+        // }           
 
-        console.log(omar())
+        // console.log(data())
 
         $('#clean-btn').click(function(e){
             e.preventDefault()

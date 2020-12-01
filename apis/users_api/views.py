@@ -23,11 +23,7 @@ class UserAPIViewSet(viewsets.ViewSet):
             my Users API 
              '''
     def list(self, request):
-        
-        try:
-            limit = int(request.GET.get('limit',None))
-        except:
-            limit = None
+        limit = get_limit(request.GET)
         fields = ['id','first_name','last_name','full_name',
                   'username','gender','birthday','birth_place',
                   'email','phone_number','address',]
@@ -94,9 +90,6 @@ class UsersRandomAPIView(ListAPIView):
     serializer_class = UserApiSerializer
     
     def get_queryset(self):
-        try:
-            limit = int(self.request.GET.get('limit','10'))
-        except:
-            limit = 10
+        limit = get_limit(request.GET,10)
         return self.queryset[:limit]
 

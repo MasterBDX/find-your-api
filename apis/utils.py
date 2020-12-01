@@ -12,6 +12,12 @@ def clean_pk(pk):
         pk = None
     return pk
 
+def get_limit(data,initial=None):
+    try:
+        limit = int(request.GET.get('limit',None))
+    except:
+        limit = initial
+    return limit
 
 def check_ordering_kwarg(order,fields):
     try:

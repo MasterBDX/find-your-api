@@ -6,6 +6,7 @@ from django.conf import settings
 from ..models import PostApiModel
 from ..users_api.serializers import ShortUserApiSerialzer
 
+import datetime
 
 class PostAddApiSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,4 +31,9 @@ class PostApiSerializer(serializers.ModelSerializer):
         return ShortUserApiSerialzer(obj.author_id).data
 
     def get_timesince(self,obj):
-        return timesince(obj.published_at)
+        published_datetime = obj.published_at
+        if type(obj.published_at)!= datetime.datetime:
+            published_datetime = datetime.datetime(obj.published_at.year,
+                                        obj.published_at.month,
+                                        obj.published_at.day)
+        return timesince(published_datetime)
