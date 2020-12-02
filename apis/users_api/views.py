@@ -10,7 +10,10 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import UserApiSerializer
 from ..models import UserApiModel
-from ..utils import check_ordering_kwarg,update_object,clean_pk
+from ..global_utils import (check_ordering_kwarg,
+                     update_object,
+                     clean_pk,
+                     get_limit)
 from ..authentication import CsrfExemptSessionAuthentication
                   
 from  random import randint
@@ -34,16 +37,16 @@ class UserAPIViewSet(viewsets.ViewSet):
             queryset = UserApiModel.objects.order_by(ordering)
         else:
             queryset = UserApiModel.objects.all()
-        serializerd_data = UserApiSerializer(queryset[:limit],many=True)
-        return Response(serializerd_data.data)
+        serialized_data = UserApiSerializer(queryset[:limit],many=True)
+        return Response(serialized_data.data)
 
     def create(self, request):
         last_user = UserApiModel.objects.values('id').last()
         obj_id = randint(last_user.get('id') + 1,100000)
-        serializerd_data = UserApiSerializer(data=request.data)
-        if serializerd_data.is_valid():
-            return Response({'id':obj_id,**serializerd_data.data})
-        return Response(serializerd_data.errors,status=status.HTTP_400_BAD_REQUEST)
+        serialized_data = UserApiSerializer(data=request.data)
+        if serialized_data.is_valid():
+            return Response({'id':obj_id,**serialized_data.data})
+        return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
         pk = clean_pk(pk)

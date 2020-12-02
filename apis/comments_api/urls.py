@@ -1,5 +1,5 @@
 from rest_framework import routers
-from django.urls import path
+from django.urls import path,include
 
 from .views import (CommentAPIViewSet,
                     CommentsSearchAPIView,
@@ -10,8 +10,7 @@ router.register('',CommentAPIViewSet,basename='comments_api')
 
 
 urlpatterns = [
+        path('',include(router.urls)),
         path('search/',CommentsSearchAPIView.as_view(),name='comments_search'),
         path('random/',CommentsRandomAPIView.as_view(),name='comments_random'),
         ]
-
-urlpatterns += list(router.urls)

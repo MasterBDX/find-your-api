@@ -13,29 +13,34 @@ def clean_pk(pk):
     return pk
 
 def get_limit(data,initial=None):
+    ''' Check if limit kwarg from request.GET is an int'''
     try:
-        limit = int(request.GET.get('limit',None))
+        limit = int(data.get('limit',None))
     except:
         limit = initial
     return limit
 
-def check_ordering_kwarg(order,fields):
+def check_ordering_kwarg(kwarg,fields):
+    ''' Check if kwarg is in existing fields 
+        and have no empty spaces '''
     try:
-        order = order.strip()
+        kwarg = kwarg.strip()
     except:
         return None
-    if order:
-        if order in fields:
-            return order
-        elif '-' == order[0]:
-            if order[1:].strip() in fields:
-                return  '-{}'.format(order[1:].strip())  
+    if kwarg:
+        if kwarg in fields:
+            return kwarg
+        elif '-' == kwarg[0]:
+            if kwarg[1:].strip() in fields:
+                return  '-{}'.format(kwarg[1:].strip())  
     return None
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 def get_thumnail_name(title,image_name):
+    ''' Rename posts thumbnails with new format '''
+
     slug_title = slugify(title)
     imgName,imgExt = os.path.splitext(image_name)
     random_str = random_string_generator(size=6)
@@ -45,6 +50,7 @@ def get_thumnail_name(title,image_name):
 
 
 def update_object(obj,data):
-        for attr, value in data.items():
-            setattr(obj, attr, value)
-        return obj
+    '''To update object attrs with out saving it in datatbase'''
+    for attr, value in data.items():
+        setattr(obj, attr, value)
+    return obj

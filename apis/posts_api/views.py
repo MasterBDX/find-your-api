@@ -11,11 +11,12 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import PostApiSerializer,PostAddApiSerializer
 
-from .utils import get_post_object
+from .utils import get_new_post,get_serialized_data
 
 from ..authentication import CsrfExemptSessionAuthentication
 from ..models import PostApiModel
-from ..utils import (check_ordering_kwarg,
+from ..global_utils import (
+                     check_ordering_kwarg,
                      clean_pk,
                      get_limit)
 
@@ -41,37 +42,22 @@ class PostAPIViewSet(viewsets.ViewSet):
     def create(self, request):
         serialized_data = PostAddApiSerializer(data=request.data)
         if serialized_data.is_valid():
-            data = PostApiSerializer(instance=get_post_object(serialized_data.validated_data)).data
+            data = PostApiSerializer(instance=get_new_post(serialized_data.validated_data)).data
             return Response(data)
         return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
-        pk = clean_pk(pk)
-        obj = get_object_or_404(PostApiModel,pk=pk)
-        serilaizerd_obj = PostApiSerializer(instance=obj)
-        return Response(serilaizerd_obj.data)
-
+        data,status_ = get_serialized_data(clean_pk(pk))
+        return Response(data,status=status_)
+    
     def update(self, request, pk=None):
-        pk = clean_pk(pk)
-        obj = get_object_or_404(PostApiModel,pk=pk)
-        serialized_data = PostAddApiSerializer(instance=obj,data=request.data)
-        if serialized_data.is_valid():
-        
-            return Response({'id':obj.id,
-                             **json_post_object(serialized_data.validated_data)
-                             })
-        return Response(serialized_data.errors,status=400)
+       data,status_ = get_serialized_data(clean_pk(pk),request.data)
+       return Response(data,status_)
 
     def partial_update(self, request, pk=None):
-        pk = clean_pk(pk)
-        obj = get_object_or_404(PostApiModel,pk=pk)
-        serialized_data = PostAddApiSerializer(instance=obj,data=request.data)
-        if serialized_data.is_valid():
-            return Response({'id':obj.id,
-                        **json_post_object(serialized_data.validated_data)
-                    })
-        return Response(serialized_data.errors,status=400)
-
+        data,status_ = get_serialized_data(clean_pk(pk),request.data,partial=True)
+        return Response(data,status_)
+                   
     def destroy(self, request, pk=None):
         pk = clean_pk(pk)
         obj = get_object_or_404(PostApiModel,pk=pk)
@@ -83,8 +69,7 @@ class PostsSearchAPIView(ListAPIView):
 
     queryset = PostApiModel.objects.all()
     serializer_class = PostApiSerializer
-    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['id','title','author_id','published_at']
+    filter_backends =[filters.SearchFilter]
     
     search_fields = ['id','title','overview','content',
                      'author_id__username','author_id__full_name',
@@ -96,8 +81,5 @@ class PostsRandomAPIView(ListAPIView):
     serializer_class = PostApiSerializer
     
     def get_queryset(self):
-        try:
-            limit = int(self.request.GET.get('limit','10'))
-        except:
-            limit = 10
+        limit = get_limit(request.GET,initial=10)
         return self.queryset[:limit]

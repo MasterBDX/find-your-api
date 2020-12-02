@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from .utils import *
 from .serializers import CommentApiSerializer,CommentAddApiSerializer
 from ..models import CommentApiModel
-from ..utils import check_ordering_kwarg,clean_pk
+from ..global_utils import check_ordering_kwarg,clean_pk
 
 
 
@@ -32,18 +32,18 @@ class CommentAPIViewSet(viewsets.ViewSet):
             queryset = CommentApiModel.objects.order_by(ordering)
         else:
             queryset = CommentApiModel.objects.all()
-        serializerd_data = CommentApiSerializer(queryset[:limit],many=True)
-        return Response(serializerd_data.data)
+        serialized_data = CommentApiSerializer(queryset[:limit],many=True)
+        return Response(serialized_data.data)
 
     def create(self, request):
         last_comment = CommentApiModel.objects.values('id').last()
         obj_id = randint(last_comment.get('id') + 1,100000)      
-        serializerd_data = CommentAddApiSerializer(data=request.data)
-        if serializerd_data.is_valid():
+        serialized_data = CommentAddApiSerializer(data=request.data)
+        if serialized_data.is_valid():
             return Response({'id':obj_id,
-                             **json_comment_object(serializerd_data.data)
+                             **json_comment_object(serialized_data.data)
                              })
-        return Response(serializerd_data.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
         pk = clean_pk(pk)
