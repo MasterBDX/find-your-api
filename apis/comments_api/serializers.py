@@ -15,6 +15,7 @@ class CommentApiSerializer(serializers.ModelSerializer):
         model = CommentApiModel
         fields = ['id','post_id','user',
                   'content','created_at','timesince']
+        read_only_fields = ('id',)
 
     def get_timesince(self,obj):
         return timesince(obj.created_at)
@@ -30,4 +31,5 @@ class CommentAddApiSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommentApiModel
         fields = ['id','user_id','post_id','content']
+        read_only_fields = ('id',)
         

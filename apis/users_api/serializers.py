@@ -8,6 +8,7 @@ class ShortUserApiSerialzer(serializers.ModelSerializer):
         fields = ['id','first_name','last_name',
                   'full_name','username',
                   'email','phone_number']
+        read_only_fields = ('id',)
 
 
 class UserApiSerializer(serializers.ModelSerializer):
@@ -17,6 +18,7 @@ class UserApiSerializer(serializers.ModelSerializer):
         fields = ['id','first_name','last_name','full_name',
                   'username','gender','birthday','birth_place',
                   'email','phone_number','address',]
+        read_only_fields = ('id',)
     
     
 

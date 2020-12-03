@@ -23,6 +23,7 @@ class PostApiSerializer(serializers.ModelSerializer):
         model = PostApiModel
         fields = ['id','author','title','overview',
                   'content','published_at','timesince']
+        read_only_fields = ('id',)
     
     def get_published_at(self,obj):
         return obj.published_at.strftime(settings.DEFAULT_DATETIME_FORMAT)
