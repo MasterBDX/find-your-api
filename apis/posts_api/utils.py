@@ -17,14 +17,11 @@ def get_new_post(data,last_id=1):
     '''
        Get new post object without saving it using passed data   
     '''
-    
     id_ = randint(last_id + 1,100000)
-    obj = PostApiModel(id=id_,
-                       title=data['title'],
-                       overview=data['overview'],
-                       content=data['content'],
-                       author_id=data['author_id'],
-                       published_at=data.get('published_at',now()))
+    data.setdefault('published_at',now())
+    data['id'] = id_
+    obj = PostApiModel(**data)
+    
     return obj
 
 
