@@ -96,14 +96,20 @@ $(function(){
         $('#copy-btn').click(fallbackCopyTextToClipboard)
 
       
-        // const data = ()=>{ 
-        //     fetch('http://127.0.0.1:8000/api/posts/')
-        //       .then((response) => response.json())
-        //       .then((json) => console.log(json))
+        const data = ()=>{
+            for (let i=0;i<=400;i++){
+                fetch('http://127.0.0.1:8000/api/posts/')
+                .then((response) => response.json())
+                .then((json) => console.log(json,i))
+  
+            } 
+            // fetch('http://127.0.0.1:8000/api/posts/')
+            // .then((response) => response.json())
+            // .then((json) => console.log(json))
 
-        // }           
+        }           
 
-        // console.log(data())
+        console.log(data())
 
         $('#clean-btn').click(function(e){
             e.preventDefault()

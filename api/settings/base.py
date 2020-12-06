@@ -177,3 +177,15 @@ DEFENDER_LOGIN_FAILURE_LIMIT = 5
 # Django Hosts Config
 ROOT_HOSTCONF = 'api.hosts'
 DEFAULT_HOST = 'www'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '200/hour',
+        'user': '3000/day'
+    }
+}
