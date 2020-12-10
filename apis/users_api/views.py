@@ -93,6 +93,6 @@ class UsersRandomAPIView(ListAPIView):
     serializer_class = UserApiSerializer
     
     def get_queryset(self):
-        limit = get_limit(request.GET,10)
+        limit = get_limit(self.request.GET,10)
         return self.queryset[:limit]
 
