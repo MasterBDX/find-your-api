@@ -11,8 +11,8 @@ router.register('', UserAPIViewSet, basename='users')
 
 
 urlpatterns = [
-        path('', include(router.urls)),
         path('search/',UsersSearchAPIView.as_view(),name='users_search'),
         path('random/',UsersRandomAPIView.as_view(),name='users_random'),
+        path('', include(router.urls)),
         ]
 

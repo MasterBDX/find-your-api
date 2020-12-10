@@ -63,4 +63,4 @@ class CommentApiModel(models.Model):
         verbose_name_plural = 'Comments Api'
 
     def __str__(self):
-        return self.name 
+        return self.user_id.username + ' comment' 

@@ -24,7 +24,7 @@ class CommentAPIViewSet(viewsets.ViewSet):
             limit = int(request.GET.get('limit',None))
         except:
             limit = None
-        fields = ['id','post_id']
+        fields = ['id','post_id','user_id']
         ordering = check_ordering_kwarg(request.GET.get('ordering'),
                                         fields)               
                
