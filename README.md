@@ -26,14 +26,13 @@
 
 <p><span style="font-size:16px"><strong>1- You can make 200 request per hour <span class="marker">( 200 / hour )</span> otherwise your request will be rejected.</strong></span></p>
 
-<p><span style="font-size:16px"><strong>2- All Requests we&#39;re provide are faked to be like real request ,will not be updated on server</strong></span></p>
+<p><span style="font-size:16px"><strong>2- All Requests we&#39;re provide are fake ,will not be updated on server</strong></span></p>
 
 <p>&nbsp;</p>
 
 <p><span style="font-size:18px">I hope you find my website helpful : )&nbsp; </span></p>
 
 <p><strong><em>MBDX</em></strong></p>
-
 
 
 Clone This Project (Make Sure You Have Git Installed)
