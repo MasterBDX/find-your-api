@@ -30,7 +30,7 @@
 
 <p><span style="font-size:18px">I hope you find my website helpful : )&nbsp; </span></p>
 
-<p><strong><em>MBDX</em></strong></p>
+<p><strong><em>MasterBDX</em></strong></p>
 
 
 Clone This Project (Make Sure You Have Git Installed)
