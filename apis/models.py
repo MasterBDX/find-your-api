@@ -10,7 +10,7 @@ class UserApiModel(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     full_name = models.CharField(max_length=255,blank=True,null=True)
-    username = models.CharField(max_length=255,blank=True,null=True)
+    username = models.CharField(max_length=255)
     gender = models.CharField(max_length=255,choices=GENDER)
     birthday = models.DateField()
     birth_place = models.CharField(max_length=255)
