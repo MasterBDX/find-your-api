@@ -28,8 +28,6 @@
 
 <p><span style="font-size:16px"><strong>2- All Requests we provide are fake ,will not be updated on server .</strong></span></p>
 
-<p>&nbsp;</p>
-
 <p><span style="font-size:18px">I hope you find my website helpful : )&nbsp; </span></p>
 
 <p><strong><em>MBDX</em></strong></p>
