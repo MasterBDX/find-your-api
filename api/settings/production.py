@@ -50,3 +50,4 @@ EMAIL_USE_TLS = True
 DEFENDER_REDIS_URL = os.environ.get('REDIS_URL')
 
 django_heroku.settings(locals())
+CORS_ORIGIN_ALLOW_ALL = True
