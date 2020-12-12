@@ -33,7 +33,7 @@ class PostApiModel(models.Model):
     title = models.CharField(max_length=255)
     overview = models.TextField()
     content = models.TextField()
-    thumbnail = models.ImageField(upload_to=get_thumnail_name,blank=True,null=True)
+    thumbnail_url = models.URLField(blank=True,null=True)
     published_at = models.DateField(default=now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

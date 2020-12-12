@@ -1,6 +1,8 @@
 from django.utils.timesince import timesince
 from django.utils.timezone import now
+from django.utils.text import Truncator
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,9 +11,14 @@ from .serializers import PostApiSerializer,PostAddApiSerializer
 
 
 from ..global_utils import (update_object)
-from ..models import PostApiModel
+from ..models import PostApiModel,UserApiModel
 
-from random import randint
+from apis.vars import POSTS_CONTENTS,POSTS_TITLES
+
+from itertools import count
+from datetime import timedelta,date
+from random import randint,choice
+import os
 
 def get_new_post(data,last_id=1):
     '''
@@ -46,3 +53,29 @@ def get_serialized_data(pk,data=None,partial=False):
         serilaized_obj = PostApiSerializer(instance=obj)
         data = serilaized_obj.data        
     return data,status_
+
+
+DEFAULT_IMAGE_URL = 'https://www.dropbox.com/s/ij4mhhogpkg7zoh/rsz_1placeholder.png?raw=1'
+
+def get_api_posts(posts_num=0,image_url=DEFAULT_IMAGE_URL):
+    users = UserApiModel.objects.all()
+    counter = count(1)
+    today = date.today()
+    time_delta = timedelta(days=1)
+    for user in users:
+        for time in range(posts_num):
+            key = choice(list(POSTS_CONTENTS.keys()))
+            post_title = str(counter.__next__()) + ' ' + POSTS_TITLES.get(key,'Title')
+            post_content = POSTS_CONTENTS.get(key,'Content')
+            overview = Truncator(post_content).words(12,truncate='...')
+        
+            obj = PostApiModel.objects.create(
+                                        author_id=user,
+                                        title=post_title,
+                                        overview=overview,
+                                        content=post_content,
+                                        published_at=today,
+                                        thumbnail_url=image_url)
+            today -= time_delta
+    print('done')       
+    return True

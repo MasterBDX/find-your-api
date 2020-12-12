@@ -4,7 +4,9 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from apis.models import UserApiModel,PostApiModel
-from ..utils import get_new_post,get_serialized_data
+from ..utils import (get_new_post,
+                     get_serialized_data,
+                     get_api_posts)
 
 from ..serializers import PostApiSerializer
 
@@ -92,3 +94,37 @@ class TestMethods(TestCase):
         self.assertNotEqual(data,serilaizer_data)
         self.assertEqual(status_code,status.HTTP_200_OK)
     
+
+class TestMethods2(TestCase):
+    def setUp(self):
+        self.today = date.today()
+        self.user = UserApiModel.objects.create(first_name='test',
+                                        last_name='bdx',
+                                        gender='male',
+                                        birthday=self.today,
+                                        birth_place='test place',
+                                        email='test@email.com',
+                                        phone_number='218931239763',
+                                        address='Test Street')
+        
+        self.user2 = UserApiModel.objects.create(first_name='test2',
+                                        last_name='bdx',
+                                        gender='male',
+                                        birthday=self.today,
+                                        birth_place='test place',
+                                        email='test2@email.com',
+                                        phone_number='218931239763',
+                                        address='Test Street')
+
+        self.user3 = UserApiModel.objects.create(first_name='test3',
+                                        last_name='bdx',
+                                        gender='male',
+                                        birthday=self.today,
+                                        birth_place='test place',
+                                        email='test3@email.com',
+                                        phone_number='218931239763',
+                                        address='Test Street')
+
+    
+    def test_posts_creator_method(self):
+        get_api_posts(posts_num=3)

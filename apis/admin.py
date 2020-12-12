@@ -7,6 +7,9 @@ class UsersAPIAdmin(admin.ModelAdmin):
     search_fields = ['id','username', 'email','full_name','birth_place',
                      'phone_number','address','birthday']
 
+class PostsAPIAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at','updated_at')
+
 admin.site.register(UserApiModel,UsersAPIAdmin)
-admin.site.register(PostApiModel)
+admin.site.register(PostApiModel,PostsAPIAdmin)
 admin.site.register(CommentApiModel)
