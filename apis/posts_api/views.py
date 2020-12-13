@@ -73,8 +73,7 @@ class PostsSearchAPIView(ListAPIView):
     filter_backends =[filters.SearchFilter]
     
     search_fields = ['id','title','overview','content',
-                     'author_id__username','author_id__full_name',
-                     'author_id__email']
+                     'author_id__full_name']
     
 
 class PostsRandomAPIView(ListAPIView):

@@ -127,4 +127,7 @@ class TestMethods2(TestCase):
 
     
     def test_posts_creator_method(self):
-        get_api_posts(posts_num=3)
+        created = get_api_posts(posts_num=3)
+        posts_num = PostApiModel.objects.count()
+        self.assertEqual(posts_num,9)
+        self.assertTrue(created)
