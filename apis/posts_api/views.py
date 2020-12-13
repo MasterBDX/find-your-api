@@ -72,8 +72,9 @@ class PostsSearchAPIView(ListAPIView):
     serializer_class = PostApiSerializer
     filter_backends =[filters.SearchFilter]
     
-    search_fields = ['id','title','overview',
-                     'author_id__full_name']
+    search_fields = ['=id','=title','=author_id__email',
+                     'overview','author_id__full_name',
+                     ]
     
 
 class PostsRandomAPIView(ListAPIView):
