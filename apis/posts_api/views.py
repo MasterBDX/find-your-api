@@ -35,8 +35,8 @@ class PostAPIViewSet(viewsets.ViewSet):
         if ordering:
             queryset = PostApiModel.objects.order_by(ordering)
         else:
-            queryset = PostApiModel.objects.all()
-        serialized_data = PostApiSerializer(queryset,many=True)
+            queryset = PostApiModel.objects.prefetch_related('author_id')
+        serialized_data = PostApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
     def create(self, request):

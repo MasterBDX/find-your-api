@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 from rest_framework.response import Response 
 from rest_framework import status
 from rest_framework.generics import ListAPIView
@@ -17,6 +17,12 @@ from ..global_utils import (check_ordering_kwarg,
                             get_limit)
 
 from random import randint
+
+
+class CommnetsListAPIView(generics.ListAPIView):
+    queryset = CommentApiModel.objects.prefetch_related('user_id','post_id')
+    serializer_class = CommentApiSerializer
+
 
 class CommentAPIViewSet(viewsets.ViewSet):
     '''  
@@ -37,9 +43,9 @@ class CommentAPIViewSet(viewsets.ViewSet):
         ordering = check_ordering_kwarg(order_attr,fields)               
                
         if ordering:
-            queryset = CommentApiModel.objects.order_by(ordering)
+            queryset = CommentApiModel.objects.prefetch_related('user_id','post_id').order_by(ordering)
         else:
-            queryset = CommentApiModel.objects.all()
+            queryset = CommentApiModel.objects.prefetch_related('user_id','post_id')
         serialized_data = CommentApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
