@@ -82,5 +82,5 @@ class PostsRandomAPIView(ListAPIView):
     serializer_class = PostApiSerializer
     
     def get_queryset(self):
-        limit = get_limit(self.request.GET,initial=10)
+        limit = get_limit(self.request.GET,initial=20)
         return self.queryset[:limit]

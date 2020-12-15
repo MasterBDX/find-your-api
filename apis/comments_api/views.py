@@ -27,9 +27,14 @@ class CommentAPIViewSet(viewsets.ViewSet):
 
     def list(self, request):
         limit = get_limit(request.GET)
-        fields = ['id','post_id','user_id']
-        ordering = check_ordering_kwarg(request.GET.get('ordering'),
-                                        fields)               
+        fields = ['id','post_id','post_id__title','user_id']
+        order_attr = request.GET.get('ordering') 
+        try :
+            if 'post_title' in order_attr:
+                order_attr = order_attr.replace('post_title','post_id__title')
+        except:
+            pass
+        ordering = check_ordering_kwarg(order_attr,fields)               
                
         if ordering:
             queryset = CommentApiModel.objects.order_by(ordering)
@@ -70,11 +75,10 @@ class CommentsSearchAPIView(ListAPIView):
     queryset = CommentApiModel.objects.all()
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
-    search_fields = ['id','post_id__title',
-                     'content','created_at',
-                     'user_id__full_name',
-                     'user_id__username',
-                     'user_id__email']
+    search_fields = ['=id','=user_id__email','=created_at',
+                     'post_id__title','content',
+                     'user_id__full_name','user_id__username',
+                     ]
 
     
 
@@ -89,5 +93,5 @@ class CommentsRandomAPIView(ListAPIView):
     serializer_class = CommentApiSerializer
     
     def get_queryset(self):
-        limit = get_limit(self.request.GET,initial=20)
+        limit = get_limit(self.request.GET,initial=50)
         return self.queryset[:limit]

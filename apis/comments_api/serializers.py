@@ -10,10 +10,11 @@ class CommentApiSerializer(serializers.ModelSerializer):
     created_at = serializers.SerializerMethodField()
     timesince = serializers.SerializerMethodField()
     user = serializers.SerializerMethodField()
+    post_title = serializers.SerializerMethodField()
 
     class Meta:
         model = CommentApiModel
-        fields = ['id','post_id','user',
+        fields = ['id','post_id','post_title','user',
                   'content','created_at','timesince']
         read_only_fields = ('id',)
 
@@ -25,6 +26,9 @@ class CommentApiSerializer(serializers.ModelSerializer):
     
     def get_user(self,obj):
         return ShortUserApiSerialzer(instance=obj.user_id).data
+    
+    def get_post_title(self,obj):
+        return obj.post_id.title
 
 
 class CommentAddApiSerializer(serializers.ModelSerializer):

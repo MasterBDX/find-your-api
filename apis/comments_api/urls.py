@@ -10,7 +10,7 @@ router.register('',CommentAPIViewSet,basename='comments_api')
 
 
 urlpatterns = [
-        path('',include(router.urls)),
         path('search/',CommentsSearchAPIView.as_view(),name='comments_search'),
         path('random/',CommentsRandomAPIView.as_view(),name='comments_random'),
+        path('',include(router.urls)),
         ]
