@@ -49,7 +49,8 @@ class PostApiModel(models.Model):
 class CommentApiModel(models.Model):
     user_id = models.ForeignKey(UserApiModel,
                                 related_name='comments',
-                                on_delete=models.CASCADE)
+                                on_delete=models.CASCADE,
+                                verbose_name="users",)
     post_id = models.ForeignKey(PostApiModel,
                                 related_name='comments',
                                 verbose_name="posts",

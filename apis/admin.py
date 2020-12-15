@@ -8,8 +8,12 @@ class UsersAPIAdmin(admin.ModelAdmin):
                      'phone_number','address','birthday']
 
 class PostsAPIAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at','updated_at')
+    list_display = ('title','author_id', 'created_at','updated_at')
+
+
+class CommentsAPIAdmin(admin.ModelAdmin):
+    list_display = ('user_id','id', 'post_id','created_at',)
 
 admin.site.register(UserApiModel,UsersAPIAdmin)
 admin.site.register(PostApiModel,PostsAPIAdmin)
-admin.site.register(CommentApiModel)
+admin.site.register(CommentApiModel,CommentsAPIAdmin)

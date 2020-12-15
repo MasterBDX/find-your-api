@@ -5,6 +5,14 @@ from ..models import UserApiModel
 class ShortUserApiSerialzer(serializers.ModelSerializer):
     class Meta:
         model = UserApiModel
+        fields = ['id','full_name',
+                  'username','email']
+        read_only_fields = ('id',)
+
+
+class AuthorApiSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = UserApiModel
         fields = ['id','first_name','last_name',
                   'full_name','username',
                   'email','phone_number']

@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from apis.models import UserApiModel,PostApiModel
 from ..utils import (get_new_post,
                      get_serialized_data,
-                     get_api_posts)
+                     create_api_posts)
 
 from ..serializers import PostApiSerializer
 
@@ -127,7 +127,7 @@ class TestMethods2(TestCase):
 
     
     def test_posts_creator_method(self):
-        created = get_api_posts(posts_num=3)
+        created = create_api_posts(num=3)
         posts_num = PostApiModel.objects.count()
         self.assertEqual(posts_num,9)
         self.assertTrue(created)

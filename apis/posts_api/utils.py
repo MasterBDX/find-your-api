@@ -57,13 +57,13 @@ def get_serialized_data(pk,data=None,partial=False):
 
 DEFAULT_IMAGE_URL = 'https://www.dropbox.com/s/ij4mhhogpkg7zoh/rsz_1placeholder.png?raw=1'
 
-def get_api_posts(posts_num=0,image_url=DEFAULT_IMAGE_URL):
+def create_api_posts(num=0,image_url=DEFAULT_IMAGE_URL):
     users = UserApiModel.objects.all()
     counter = count(1)
     today = date.today()
     time_delta = timedelta(days=1)
     for user in users:
-        for time in range(posts_num):
+        for time in range(num):
             key = choice(list(POSTS_CONTENTS.keys()))
             post_title = str(counter.__next__()) + ' ' + POSTS_TITLES.get(key,'Title')
             post_content = POSTS_CONTENTS.get(key,'Content')

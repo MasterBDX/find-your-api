@@ -4,7 +4,7 @@ from django.utils.timesince import timesince
 from django.conf import settings
 
 from ..models import PostApiModel
-from ..users_api.serializers import ShortUserApiSerialzer
+from ..users_api.serializers import AuthorApiSerialzer
 
 import datetime
 
@@ -29,7 +29,7 @@ class PostApiSerializer(serializers.ModelSerializer):
         return obj.published_at.strftime(settings.DEFAULT_DATETIME_FORMAT)
     
     def get_author(self,obj):
-        return ShortUserApiSerialzer(obj.author_id).data
+        return AuthorApiSerialzer(obj.author_id).data
 
     def get_timesince(self,obj):
         published_datetime = obj.published_at

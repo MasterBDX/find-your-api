@@ -26,3 +26,20 @@ POSTS_TITLES = {
     'greek':"Νέα ανάρτηση",
     'chinese':"最新帖子"
     }
+
+
+COMMENTS_CONTENT = [
+    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ",
+    "Al contrario del pensamiento popular, el texto de Lorem Ipsum no es simplemente texto aleatorio.",
+    'штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur",',
+    "Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir.",
+    'Lorem Ipsum सिसरौ(Sisero) द्वारा "De Finibus Bonorum et Malorum" (अच्छाई और बुराई की चरम सीमा)',
+    "如今互联网提供各种各样版本的Lorem Ipsum段落，但是大多数都多多少少出于刻意幽默或者其他随机插入的荒谬单词而被篡改过了",
+    "Հակառակ ընդհանուր պատկերացմանը` Lorem Ipsum-ը այդքան էլ պատահական հավաքված տեքստ չէ:",
+    " Il testo così generato è sempre privo di ripetizioni, parole imbarazzanti o fuori luogo ecc.",
+    "للمهتمين قمنا بوضع نص لوريم إبسوم القياسي والمُستخدم منذ القرن الخامس عشر في الأسفل",
+    "vorgefertigte Stücke zu wiederholen - was es nötig machte einen richtigen Generator zu entwickeln."
+
+
+
+]
