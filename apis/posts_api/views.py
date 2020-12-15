@@ -30,13 +30,12 @@ class PostAPIViewSet(viewsets.ViewSet):
 
     def list(self, request):
         limit = get_limit(request.GET)
-        # ordering = check_ordering_kwarg(request.GET.get('ordering'),
-        #                                 ALLOWED_POST_FIELDS)                              
-        # if ordering:
-        #     queryset = PostApiModel.objects.order_by(ordering)
-        # else:
-        #     queryset = PostApiModel.objects.all()
-        queryset = PostApiModel.objects.all()
+        ordering = check_ordering_kwarg(request.GET.get('ordering'),
+                                        ALLOWED_POST_FIELDS)                              
+        if ordering:
+            queryset = PostApiModel.objects.order_by(ordering)
+        else:
+            queryset = PostApiModel.objects.all()
         serialized_data = PostApiSerializer(queryset,many=True)
         return Response(serialized_data.data)
 
