@@ -25,7 +25,7 @@ class CommentApiSerializer(serializers.ModelSerializer):
         return obj.created_at.strftime(settings.DEFAULT_DATETIME_FORMAT)
     
     def get_username(self,obj):
-        return obj.user.username
+        return obj.user_id.username
     
     def get_post_title(self,obj):
         return obj.post_id.title
