@@ -12,7 +12,7 @@ class PostsAPIAdmin(admin.ModelAdmin):
 
 
 class CommentsAPIAdmin(admin.ModelAdmin):
-    list_display = ('id','post', 'post_id','created_at',)
+    list_display = ('id','created_at',)
 
 admin.site.register(UserApiModel,UsersAPIAdmin)
 admin.site.register(PostApiModel,PostsAPIAdmin)
