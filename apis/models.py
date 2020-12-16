@@ -51,10 +51,13 @@ class CommentApiModel(models.Model):
                                 related_name='comments',
                                 on_delete=models.CASCADE,
                                 verbose_name="users",)
-    post_id = models.ForeignKey(PostApiModel,
+    post = models.ForeignKey(PostApiModel,
                                 related_name='comments',
                                 verbose_name="posts",
                                 on_delete=models.CASCADE)
+
+    postId = models.PositiveIntegerField(default=1)
+
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

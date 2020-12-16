@@ -40,7 +40,7 @@ def get_new_comment(data,created_at=timezone.now,last_id=1):
     timesince_ = timesince(created_at)
     return {
             'id':comment_id,
-            'post_id':data['post_id'].id,
+            'post_id':data['post_id'],
             'user':api_user,
             'content':data['content'],
             'create_at':created_at.strftime(settings.DEFAULT_DATETIME_FORMAT),

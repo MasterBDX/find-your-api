@@ -27,19 +27,14 @@ class CommentAPIViewSet(viewsets.ViewSet):
 
     def list(self, request):
         limit = get_limit(request.GET)
-        fields = ['id','post_id','post_id__title','user_id']
+        fields = ['id','post_id','user_id']
         order_attr = request.GET.get('ordering') 
-        try :
-            if 'post_title' in order_attr:
-                order_attr = order_attr.replace('post_title','post_id__title')
-        except:
-            pass
         ordering = check_ordering_kwarg(order_attr,fields)               
                
         if ordering:
-            queryset = CommentApiModel.objects.select_related('user_id','post_id').order_by(ordering)
+            queryset = CommentApiModel.objects.select_related('user_id').order_by(ordering)
         else:
-            queryset = CommentApiModel.objects.select_related('user_id','post_id')
+            queryset = CommentApiModel.objects.select_related('user_id')
         serialized_data = CommentApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
@@ -75,9 +70,9 @@ class CommentsSearchAPIView(ListAPIView):
     queryset = CommentApiModel.objects.select_related('user_id','post_id')
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
-    search_fields = ['=id','=user_id__email','=created_at',
-                     'post_id__title','content',
-                     'user_id__full_name','user_id__username',
+    search_fields = ['=id','=user_id__email','=post_id','=created_at',
+                     'content','user_id__full_name',
+                     'user_id__username',
                      ]
 
     
