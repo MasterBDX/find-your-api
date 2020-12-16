@@ -33,9 +33,9 @@ class PostAPIViewSet(viewsets.ViewSet):
         ordering = check_ordering_kwarg(request.GET.get('ordering'),
                                         ALLOWED_POST_FIELDS)                              
         if ordering:
-            queryset = PostApiModel.objects.order_by(ordering)
+            queryset = PostApiModel.objects.select_related('author_id').order_by(ordering)
         else:
-            queryset = PostApiModel.objects.prefetch_related('author_id')
+            queryset = PostApiModel.objects.select_related('author_id')
         serialized_data = PostApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
@@ -68,7 +68,7 @@ class PostAPIViewSet(viewsets.ViewSet):
 class PostsSearchAPIView(ListAPIView):
     ''' View for search about users using search filter  '''
 
-    queryset = PostApiModel.objects.all()
+    queryset = PostApiModel.objects.select_related('author_id')
     serializer_class = PostApiSerializer
     filter_backends =[filters.SearchFilter]
     
@@ -78,7 +78,7 @@ class PostsSearchAPIView(ListAPIView):
     
 
 class PostsRandomAPIView(ListAPIView):
-    queryset = PostApiModel.objects.order_by('?')
+    queryset = PostApiModel.objects.select_related('author_id').order_by('?')
     serializer_class = PostApiSerializer
     
     def get_queryset(self):

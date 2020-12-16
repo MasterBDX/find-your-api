@@ -8,11 +8,14 @@ from django.conf.urls.static import static
 
 from api.sitemaps import GuidesSitemap,StaticSitemap
 
+import debug_toolbar
+
 sitemaps = {'guides':GuidesSitemap,
             'static':StaticSitemap}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('admin/defender/', include('defender.urls')), # defender admin
     path('sitemap.xml',sitemap,{'sitemaps':sitemaps}),
     
@@ -29,6 +32,7 @@ urlpatterns = [
 
 
 if settings.DEBUG == True:
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls)),]
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,

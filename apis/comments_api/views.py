@@ -18,12 +18,6 @@ from ..global_utils import (check_ordering_kwarg,
 
 from random import randint
 
-
-class CommnetsListAPIView(generics.ListAPIView):
-    queryset = CommentApiModel.objects.prefetch_related('user_id','post_id')
-    serializer_class = CommentApiSerializer
-
-
 class CommentAPIViewSet(viewsets.ViewSet):
     '''  
          Viewset to handle GET POST PUT PATCH DELETE 
@@ -43,9 +37,9 @@ class CommentAPIViewSet(viewsets.ViewSet):
         ordering = check_ordering_kwarg(order_attr,fields)               
                
         if ordering:
-            queryset = CommentApiModel.objects.prefetch_related('user_id','post_id').order_by(ordering)
+            queryset = CommentApiModel.objects.select_related('user_id','post_id').order_by(ordering)
         else:
-            queryset = CommentApiModel.objects.prefetch_related('user_id','post_id')
+            queryset = CommentApiModel.objects.select_related('user_id','post_id')
         serialized_data = CommentApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
@@ -78,7 +72,7 @@ class CommentAPIViewSet(viewsets.ViewSet):
 class CommentsSearchAPIView(ListAPIView):
     ''' View for search about comments using search filter  '''
 
-    queryset = CommentApiModel.objects.all()
+    queryset = CommentApiModel.objects.select_related('user_id','post_id')
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = ['=id','=user_id__email','=created_at',
@@ -95,7 +89,7 @@ class CommentsRandomAPIView(ListAPIView):
         select a custom limit
     '''
 
-    queryset = CommentApiModel.objects.order_by('?')
+    queryset = CommentApiModel.objects.select_related('user_id','post_id').order_by('?')
     serializer_class = CommentApiSerializer
     
     def get_queryset(self):
