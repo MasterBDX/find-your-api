@@ -27,7 +27,10 @@ class CommentAPIViewSet(viewsets.ViewSet):
 
     def list(self, request):
         limit = get_limit(request.GET)
-        fields = ['id','post_id','user_id']
+        fields = [
+                  'id','user_id','post_id',
+                  'username','email'
+                  ]
         order_attr = request.GET.get('ordering') 
         ordering = check_ordering_kwarg(order_attr,fields)               
                
