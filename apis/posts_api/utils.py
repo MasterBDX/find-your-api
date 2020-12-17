@@ -54,10 +54,7 @@ def get_serialized_data(pk,data=None,partial=False):
         data = serilaized_obj.data        
     return data,status_
 
-
-DEFAULT_IMAGE_URL = 'https://www.dropbox.com/s/ij4mhhogpkg7zoh/rsz_1placeholder.png?raw=1'
-
-def create_api_posts(num=0,image_url=DEFAULT_IMAGE_URL):
+def create_api_posts(num=0):
     users = UserApiModel.objects.all()
     counter = count(1)
     today = date.today()
@@ -75,7 +72,7 @@ def create_api_posts(num=0,image_url=DEFAULT_IMAGE_URL):
                                         overview=overview,
                                         content=post_content,
                                         published_at=today,
-                                        thumbnail_url=image_url)
+                                        )
             today -= time_delta
     print('done')       
     return True
