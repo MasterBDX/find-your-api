@@ -32,9 +32,9 @@ class CommentAPIViewSet(viewsets.ViewSet):
         ordering = check_ordering_kwarg(order_attr,fields)               
                
         if ordering:
-            queryset = CommentApiModel.objects.select_related('user_id').order_by(ordering)
+            queryset = CommentApiModel.objects.order_by(ordering)
         else:
-            queryset = CommentApiModel.objects.select_related('user_id')
+            queryset = CommentApiModel.objects.all()
         serialized_data = CommentApiSerializer(queryset[:limit],many=True)
         return Response(serialized_data.data)
 
@@ -67,7 +67,7 @@ class CommentAPIViewSet(viewsets.ViewSet):
 class CommentsSearchAPIView(ListAPIView):
     ''' View for search about comments using search filter  '''
 
-    queryset = CommentApiModel.objects.select_related('user_id')
+    queryset = CommentApiModel.objects.all()
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = [
