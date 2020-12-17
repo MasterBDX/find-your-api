@@ -17,18 +17,6 @@ from ..vars import COMMENTS_CONTENT
 
 import random 
 
-# def json_comment_object(data,created_at=None):
-#     if not created_at:
-#         created_at = timezone.now()
-#     api_user = ShortUserApiSerialzer(data['user_id']).data
-#     timesince_ = timesince(created_at)
-#     return {
-#             'post_id':data['post_id'].id,
-#             'user':api_user,
-#             'content':data['content'],
-#             'create_at':created_at.strftime(settings.DEFAULT_DATETIME_FORMAT),
-#             'timesince':timesince_
-#             }
 
 def get_new_comment(data,created_at=timezone.now,last_id=1):
     comment_id = random.randint(last_id + 1,100000)
@@ -37,14 +25,13 @@ def get_new_comment(data,created_at=timezone.now,last_id=1):
     # To get the datetime when this funciton called
 
     created_at = created_at()
-    timesince_ = timesince(created_at)
+    
     return {
             'id':comment_id,
             'post_id':data['post_id'],
             'user':api_user,
             'content':data['content'],
             'create_at':created_at.strftime(settings.DEFAULT_DATETIME_FORMAT),
-            'timesince':timesince_
             }
     
 

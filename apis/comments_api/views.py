@@ -67,7 +67,7 @@ class CommentAPIViewSet(viewsets.ViewSet):
 class CommentsSearchAPIView(ListAPIView):
     ''' View for search about comments using search filter  '''
 
-    queryset = CommentApiModel.objects.select_related('user_id','post_id')
+    queryset = CommentApiModel.objects.select_related('user_id')
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = ['=id','=user_id__email','=post_id','=created_at',
@@ -84,7 +84,7 @@ class CommentsRandomAPIView(ListAPIView):
         select a custom limit
     '''
 
-    queryset = CommentApiModel.objects.select_related('user_id','post_id').order_by('?')
+    queryset = CommentApiModel.objects.select_related('user_id').order_by('?')
     serializer_class = CommentApiSerializer
     
     def get_queryset(self):

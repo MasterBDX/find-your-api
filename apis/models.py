@@ -52,7 +52,9 @@ class CommentApiModel(models.Model):
                                 on_delete=models.CASCADE,
                                 verbose_name="users",)
     
-
+    userId  =  models.PositiveIntegerField(default=1)
+    username = models.CharField(max_length=255,default='username')
+    email = models.EmailField(default='email@mail.com')
     post_id = models.PositiveIntegerField(default=1)
 
     content = models.TextField()
