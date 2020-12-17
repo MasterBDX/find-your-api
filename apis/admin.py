@@ -8,7 +8,7 @@ class UsersAPIAdmin(admin.ModelAdmin):
                      'phone_number','address','birthday']
 
 class PostsAPIAdmin(admin.ModelAdmin):
-    list_display = ('title','id','author_id', 'created_at','updated_at')
+    list_display = ('title','id','author_id')
 
 
 class CommentsAPIAdmin(admin.ModelAdmin):

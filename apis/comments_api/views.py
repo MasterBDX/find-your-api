@@ -35,7 +35,9 @@ class CommentAPIViewSet(viewsets.ViewSet):
             queryset = CommentApiModel.objects.order_by(ordering)
         else:
             queryset = CommentApiModel.objects.all()
-        serialized_data = CommentApiSerializer(queryset[:limit],many=True)
+        if limit:
+            queryset = queryset[:limit]
+        serialized_data = CommentApiSerializer(queryset,many=True)
         return Response(serialized_data.data)
 
     def create(self, request):
@@ -71,8 +73,8 @@ class CommentsSearchAPIView(ListAPIView):
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = [
-                     '=id','=email','=post_id',
-                     '=created_at','content','username',
+                     '=id','=email','=created_at',
+                     'content','username',
                      ]
 
     
@@ -84,7 +86,7 @@ class CommentsRandomAPIView(ListAPIView):
         select a custom limit
     '''
 
-    queryset = CommentApiModel.objects.select_related('user_id').order_by('?')
+    queryset = CommentApiModel.objects.order_by('?')
     serializer_class = CommentApiSerializer
     
     def get_queryset(self):

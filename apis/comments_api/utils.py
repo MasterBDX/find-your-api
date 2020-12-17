@@ -14,18 +14,13 @@ from ..models import UserApiModel,PostApiModel,CommentApiModel
 from ..vars import COMMENTS_CONTENT
 
 
-
+from datetime import date
 import random 
 
 
-def get_new_comment(data,created_at=timezone.now,last_id=1):
+def get_new_comment(data,last_id=1):
     comment_id = random.randint(last_id + 1,100000)
-    api_user = ShortUserApiSerialzer(data['user_id']).data
-    
     # To get the datetime when this funciton called
-
-    created_at = created_at()
-    
     return {
             'id':comment_id,
             'post_id':data['post_id'],
@@ -33,19 +28,21 @@ def get_new_comment(data,created_at=timezone.now,last_id=1):
             'username':data['username'],
             'email':data['email'],
             'content':data['content'],
-            'create_at':created_at.strftime(settings.DEFAULT_DATETIME_FORMAT),
+            'create_at':date.today()
             }
     
 
 def get_serialized_data(pk=None,data=None,partial=False):
     pk = clean_pk(pk)
     obj = get_object_or_404(CommentApiModel,pk=pk)
+    
     status_ = status.HTTP_200_OK
     if data:
         serialized_object = CommentAddApiSerializer(obj,data=data,
                                                     partial=partial)
         if serialized_object.is_valid():
             updated_object = update_object(obj,serialized_object.validated_data)
+            
             serialized_data = CommentApiSerializer(updated_object).data
         else:
             serialized_data = serialized_object.errors

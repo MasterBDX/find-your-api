@@ -35,8 +35,6 @@ class PostApiModel(models.Model):
     content = models.TextField()
     thumbnail_url = models.URLField(blank=True,null=True)
     published_at = models.DateField(default=now)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Post'
