@@ -47,19 +47,12 @@ class PostApiModel(models.Model):
      
      
 class CommentApiModel(models.Model):
-    user_id = models.ForeignKey(UserApiModel,
-                                related_name='comments',
-                                on_delete=models.CASCADE,
-                                verbose_name="users",)
-    
-    userId  =  models.PositiveIntegerField(default=1)
+    user_id  =  models.PositiveIntegerField(default=1)
     username = models.CharField(max_length=255,default='username')
     email = models.EmailField(default='email@mail.com')
     post_id = models.PositiveIntegerField(default=1)
-
     content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Comment'
