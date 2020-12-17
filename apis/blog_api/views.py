@@ -25,25 +25,11 @@ class PaginatedPostsListAPIView(generics.ListAPIView):
                      'author_id__username','author_id__full_name']
     
     pagination_class = BasicPagination
-    
-
-
-                      
-class PostsListAPIView(generics.ListAPIView):
-    queryset = PostApiModel.objects.all()
-    serializer_class = BlogPostApiSerializer
-    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
-    
-    ordering_fields = ['id','title','author_id','published_at']
-    
-    search_fields = ['id','title','overview','content',
-                     'author_id__username','author_id__full_name']
-    
+        
 
 class PostsDetailAPIView(generics.RetrieveAPIView):
     queryset = PostApiModel.objects.all()
     serializer_class = BlogPostDetialApiSerializer
-
 
 
 class AuthorPostsListAPIView(generics.ListAPIView):
@@ -57,15 +43,10 @@ class PostCommentsListAPIView(generics.ListAPIView):
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = [
-                       'id','post_id__title',
-                       'created_at','user_id__username',
-                       'user_id__full_name',
+                       'id','post_id',
+                       'created_at','user_id',
+                       'username','email'
                        ]
-    search_fields = ['id','post_id__title',
-                     'content','created_at',
-                     'user_id__full_name',
-                     'user_id__username',
-                     'user_id__email']
                      
     def get_queryset(self):
         post_id = self.kwargs.get('pk')

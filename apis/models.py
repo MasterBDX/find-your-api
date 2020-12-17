@@ -33,7 +33,6 @@ class PostApiModel(models.Model):
     title = models.CharField(max_length=255)
     overview = models.TextField()
     content = models.TextField()
-    thumbnail_url = models.URLField(blank=True,null=True)
     published_at = models.DateField(default=now)
 
     class Meta:

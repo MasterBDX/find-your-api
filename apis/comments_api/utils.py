@@ -20,6 +20,7 @@ import random
 
 def get_new_comment(data,last_id=1):
     comment_id = random.randint(last_id + 1,100000)
+
     # To get the datetime when this funciton called
     return {
             'id':comment_id,
@@ -53,7 +54,7 @@ def get_serialized_data(pk=None,data=None,partial=False):
 
 
 def create_api_comments(num=0):
-    posts = PostApiModel.objects.all()
+    posts = PostApiModel.objects.values('id')
     for post in posts:
         users = UserApiModel.objects.order_by('?')
         users_num = users.count()
@@ -62,8 +63,10 @@ def create_api_comments(num=0):
         
         for user in users[:num]:
             content = random.choice(COMMENTS_CONTENT)
-            comment = CommentApiModel.objects.create(post_id=post,
-                                                    user_id=user,
+            comment = CommentApiModel.objects.create(post_id=post['id'],
+                                                    user_id=user.id,
+                                                    username=user.username,
+                                                    email=user.email,
                                                     content=content)
                 
     return True        
