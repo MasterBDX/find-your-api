@@ -35,7 +35,7 @@ class PostApiModel(models.Model):
     title = models.CharField(max_length=255)
     overview = models.TextField()
     content = models.TextField()
-    published_at = models.DateField(default=now)
+    published_at = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Post'
