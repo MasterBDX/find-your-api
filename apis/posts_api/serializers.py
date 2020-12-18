@@ -13,7 +13,7 @@ class PostAddApiSerializer(serializers.ModelSerializer):
         model = PostApiModel
         fields = ['title','overview','author_id',
                   'author_name','author_email',
-                  'content','published_at']
+                  'content']
 
 
 class PostApiSerializer(serializers.ModelSerializer):

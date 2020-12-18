@@ -1,7 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
-from django.utils.timezone import now
+
 from .global_utils import get_thumnail_name
 
 GENDER = [('male','Male'),('female','Female')]
