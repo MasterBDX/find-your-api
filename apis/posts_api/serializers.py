@@ -11,18 +11,16 @@ import datetime
 class PostAddApiSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostApiModel
-        fields = ['title','overview',
-                  'content','author_id','published_at']
+        fields = ['title','overview','author_id',
+                  'author_name','author_email',
+                  'content','published_at']
 
 
 class PostApiSerializer(serializers.ModelSerializer):
-    author = serializers.SerializerMethodField()
     class Meta:
         model = PostApiModel
-        fields = ['id','author','title','overview',
+        fields = ['id','author_id','author_name',
+                  'author_email','title','overview',
                   'content','published_at']
         read_only_fields = ('id',)
-    
-    def get_author(self,obj):
-        return AuthorApiSerialzer(obj.author_id).data
 

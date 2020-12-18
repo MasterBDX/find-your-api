@@ -32,7 +32,7 @@ class TestMethods(TestCase):
         self.data = {'title':'Test Post',
                      'overview':'test overview',
                      'content':'Test Content',
-                     'author_id':self.user,
+                     'author_id':self.user.id,
                      'published_at':self.today}
 
         self.updated_data = {'title':'Test Post Updated',
@@ -55,7 +55,7 @@ class TestMethods(TestCase):
         self.assertEqual(obj.title,self.data['title'])
         self.assertEqual(obj.overview,self.data['overview'])
         self.assertEqual(obj.content,self.data['content'])
-        self.assertEqual(obj.author_id,self.user)
+        self.assertEqual(obj.author_id,self.user.id)
         self.assertEqual(obj.published_at,self.today)
         self.assertTrue(type(obj.id)==int)
     

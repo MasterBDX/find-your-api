@@ -67,7 +67,9 @@ def create_api_posts(num=0):
             overview = Truncator(post_content).words(12,truncate='...')
         
             obj = PostApiModel.objects.create(
-                                        author_id=user,
+                                        author_id=user.id,
+                                        author_name=user.username,
+                                        author_email=user.email,
                                         title=post_title,
                                         overview=overview,
                                         content=post_content,

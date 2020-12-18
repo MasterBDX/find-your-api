@@ -29,8 +29,7 @@ class UserApiModel(models.Model):
 
 
 class PostApiModel(models.Model):
-    author_id = models.ForeignKey(UserApiModel,on_delete=models.CASCADE)
-    authorId = models.PositiveIntegerField(default=1)
+    author_id = models.PositiveIntegerField(default=1)
     author_name = models.CharField(max_length=255)
     author_email = models.EmailField()
     title = models.CharField(max_length=255)
