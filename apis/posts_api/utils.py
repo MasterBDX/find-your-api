@@ -1,5 +1,4 @@
 from django.utils.timesince import timesince
-from django.utils.timezone import now
 from django.utils.text import Truncator
 from django.shortcuts import get_object_or_404
 from django.conf import settings
@@ -25,7 +24,7 @@ def get_new_post(data,last_id=1):
        Get new post object without saving it using passed data   
     '''
     id_ = randint(last_id + 1,100000)
-    data.setdefault('published_at',now())
+    data.setdefault('published_at',date.today())
     data['id'] = id_
     obj = PostApiModel(**data)
     
@@ -73,7 +72,6 @@ def create_api_posts(num=0):
                                         title=post_title,
                                         overview=overview,
                                         content=post_content,
-                                        published_at=today,
                                         )
             today -= time_delta
     print('done')       
