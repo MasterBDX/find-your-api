@@ -34,6 +34,7 @@ class PaginatedPostsSearchAPIView(generics.ListAPIView):
     search_fields = ['=id','title',
                      '=author_email',
                      'author_name',
+                     'content'
                      ]
     
     pagination_class = BasicPagination
@@ -47,9 +48,7 @@ class PostsDetailAPIView(generics.RetrieveAPIView):
 class AuthorPostsListAPIView(generics.ListAPIView):
     serializer_class = PostApiSerializer
     pagination_class = BasicPagination
-    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['id','title']
-
+    
     def get_queryset(self):
         author_id = self.kwargs.get('pk')
         return PostApiModel.objects.filter(author_id=author_id)
