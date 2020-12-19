@@ -3,29 +3,41 @@ from rest_framework import filters
 
 from django.shortcuts import get_object_or_404
 
-from ..models import PostApiModel
 
 from .pagination import BasicPagination
 from .serializers import (
-                          BlogPostApiSerializer,
+                          
                           BlogPostDetialApiSerializer
                             )
 
+from apis.posts_api.serializers import PostApiSerializer
+from apis.vars import ALLOWED_POST_FIELDS
+
+from ..models import PostApiModel,CommentApiModel
 from ..comments_api.serializers import CommentApiSerializer
 
 
 class PaginatedPostsListAPIView(generics.ListAPIView):
     queryset = PostApiModel.objects.all()
-    serializer_class = BlogPostApiSerializer
+    serializer_class = PostApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     
-    ordering_fields = ['id','title','author_id','published_at']
-    
-    search_fields = ['id','title','overview','content','author_id__email',
-                     'author_id__username','author_id__full_name']
-    
+    ordering_fields = ALLOWED_POST_FIELDS
     pagination_class = BasicPagination
         
+    
+class PaginatedPostsSearchAPIView(generics.ListAPIView):
+    queryset = PostApiModel.objects.all()
+    serializer_class = PostApiSerializer
+    filter_backends =[filters.SearchFilter]
+    
+    search_fields = ['=id','title',
+                     '=author_email',
+                     'author_name',
+                     ]
+    
+    pagination_class = BasicPagination
+
 
 class PostsDetailAPIView(generics.RetrieveAPIView):
     queryset = PostApiModel.objects.all()
@@ -33,24 +45,27 @@ class PostsDetailAPIView(generics.RetrieveAPIView):
 
 
 class AuthorPostsListAPIView(generics.ListAPIView):
-    serializer_class = BlogPostApiSerializer
+    serializer_class = PostApiSerializer
+    pagination_class = BasicPagination
+    filter_backends =[filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = ['id','title']
+
     def get_queryset(self):
         author_id = self.kwargs.get('pk')
-        return PostApiModel.objects.filter(author_id__id=author_id)
+        return PostApiModel.objects.filter(author_id=author_id)
 
 
 class PostCommentsListAPIView(generics.ListAPIView):
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = [
-                       'id','post_id',
-                       'created_at','user_id',
+                       'id','user_id',
                        'username','email'
                        ]
                      
     def get_queryset(self):
         post_id = self.kwargs.get('pk')
-        return get_object_or_404(PostApiModel,id=post_id).comments.all()
+        return CommentApiModel.objects.filter(post_id=post_id)
     
 
 class PostCommentDetailAPIView(generics.RetrieveAPIView):
@@ -58,7 +73,7 @@ class PostCommentDetailAPIView(generics.RetrieveAPIView):
     
     def get_queryset(self):
         post_id = self.kwargs.get('pk')
-        return get_object_or_404(PostApiModel,id=post_id).comments.all()
+        return CommentApiModel.objects.filter(post_id=post_id)
     
     def get_object(self):
         queryset = self.get_queryset()

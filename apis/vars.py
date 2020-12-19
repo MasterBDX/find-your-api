@@ -1,4 +1,4 @@
-ALLOWED_POST_FIELDS = ['id','title','published_at','author_id']
+ALLOWED_POST_FIELDS = ['id','title','author_id','author_name']
 
 
 POSTS_CONTENTS = {
