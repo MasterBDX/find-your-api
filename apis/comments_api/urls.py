@@ -9,7 +9,7 @@ from .views import (CommentAPIViewSet,
 router = routers.DefaultRouter()
 router.register('',CommentAPIViewSet,basename='comments_api')
 
-
+app_name = 'comments_api'
 urlpatterns = [
         path('search/',CommentsSearchAPIView.as_view(),name='comments_search'),
         path('random/',CommentsRandomAPIView.as_view(),name='comments_random'),

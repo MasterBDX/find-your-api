@@ -9,6 +9,7 @@ from .views import (PaginatedPostsListAPIView,
                     PostCommentsListAPIView,
                     PostCommentDetailAPIView)
 
+app_name = 'blog_api'
 
 urlpatterns = [
         path('', PaginatedPostsListAPIView.as_view(), name='paginated-list'),

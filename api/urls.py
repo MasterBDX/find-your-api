@@ -22,10 +22,10 @@ urlpatterns = [
     path('', include('main.urls',namespace='main')),
  
     # APIs urls combination
-    path('api/users/', include('apis.users_api.urls')),
-    path('api/posts/', include('apis.posts_api.urls')),
-    path('api/comments/', include('apis.comments_api.urls')),
-    path('api/blog/', include('apis.blog_api.urls')),
+    path('api/users/', include('apis.users_api.urls',namespace='users')),
+    path('api/posts/', include('apis.posts_api.urls',namespace='posts')),
+    path('api/comments/', include('apis.comments_api.urls',namespace='comments')),
+    path('api/blog/', include('apis.blog_api.urls',namespace='blog')),
 ]
 
 

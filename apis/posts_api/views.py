@@ -42,8 +42,7 @@ class PostAPIViewSet(viewsets.ViewSet):
     def create(self, request):
         serialized_data = PostAddApiSerializer(data=request.data)
         if serialized_data.is_valid():
-            last_post = PostApiModel.objects.values('id').last()
-            data = PostApiSerializer(instance=get_new_post(serialized_data.validated_data,last_id=last_post.get('id'))).data
+            data = PostApiSerializer(instance=get_new_post(serialized_data.validated_data)).data
             return Response(data)
         return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 

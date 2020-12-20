@@ -1,7 +1,9 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from rest_framework import status
 from rest_framework.test import APIClient
+
 
 from apis.models import UserApiModel,PostApiModel
 from ..utils import (get_new_post,
@@ -11,6 +13,37 @@ from ..utils import (get_new_post,
 from ..serializers import PostApiSerializer
 
 from datetime import date
+
+def create_post(data):
+    return PostApiModel.objects.create(**data)
+
+class TestPostsAPIViews(TestCase):
+    def setUp(self):
+        self.list_url = reverse('posts_api:api-list')
+        self.client = APIClient()
+        self.data = {
+                     'author_id':1,'author_name':'test_name',
+                     'author_email':'test@mail.com','title':'Test Title',
+                     'overview':'Test OverView Short Overview',
+                     'content':'Test Content Long Content',
+                     }
+
+    def test_viewset_list_method(self):
+        for _ in range(3):
+            create_post(self.data)
+        posts = PostApiModel.objects.all()
+        serialized_data = PostApiSerializer(posts,many=True).data
+        
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.data,serialized_data)
+    
+    def test_viewset_create_method(self):
+        response = self.client.post(self.list_url,self.data)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(self.data['author_id'],response.data.get('author_id'))
+        
+
 
 class TestMethods(TestCase):
     '''Test utils file method for posts API module'''

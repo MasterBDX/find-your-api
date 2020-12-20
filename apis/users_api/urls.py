@@ -9,6 +9,7 @@ app_name = 'users_api'
 router = DefaultRouter()
 router.register('', UserAPIViewSet, basename='users')
 
+app_name = 'users_api'
 
 urlpatterns = [
         path('search/',UsersSearchAPIView.as_view(),name='users_search'),

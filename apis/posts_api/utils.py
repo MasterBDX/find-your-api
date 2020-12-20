@@ -19,11 +19,11 @@ from datetime import timedelta,date
 from random import randint,choice
 import os
 
-def get_new_post(data,last_id=1):
+def get_new_post(data,min_num=101,max_num=100000):
     '''
        Get new post object without saving it using passed data   
     '''
-    id_ = randint(last_id + 1,100000)
+    id_ = randint(min_num,max_num)
     data.setdefault('published_at',date.today())
     data['id'] = id_
     obj = PostApiModel(**data)
