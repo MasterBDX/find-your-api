@@ -37,10 +37,12 @@ class ApiGuide(models.Model):
     active = models.BooleanField(default = False)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    order= models.PositiveIntegerField(default=1)
 
     objects = APIGuideManager()
 
     class Meta:
+        ordering = ['-order','-timestamp']
         verbose_name = 'API Guide'
         verbose_name_plural = 'API Guides'
 
