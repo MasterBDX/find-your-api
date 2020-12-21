@@ -1,12 +1,18 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.urls import reverse
-
+from django.contrib.sitemaps import ping_google
+from django.conf import settings
 
 from ckeditor.fields import RichTextField
 
 from .managers import APIGuideManager
 from .utils import get_image_name
+
+
+import os
+
+PING_URL = 'https://www.google.com/webmasters/tools/ping'
 
 class SiteInfo(models.Model):
     title = models.CharField(max_length=255)
@@ -54,6 +60,19 @@ class ApiGuide(models.Model):
     
     def get_absolute_url(self):
         return reverse('main:detail',kwargs={'slug':self.slug})
+
+    def save(self,*args,**kwargs):
+        super().save(*args,**kwargs)
+        base_url = getattr(settings,'BASE_URL','findyourapi.com/')
+        sitemap_path = os.path.join(base_url,'sitemap.xml')
+        print(sitemap_path)
+        try:
+            ping_google(sitemap_url=sitemap_path,
+                        ping_url=PING_URL,
+                        sitemap_uses_https=False)
+        except:
+            print('some thing wrong')
+            pass
 
 
 class Suggestion(models.Model):
