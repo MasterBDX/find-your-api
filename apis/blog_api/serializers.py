@@ -8,6 +8,7 @@ from ..comments_api.serializers import CommentApiSerializer
 
 class BlogCommentApiSerializer(serializers.ModelSerializer):
     class Meta:
+        read_only = True
         model = CommentApiModel
         fields = ['id','user_id','username','email',
                   'content','created_at']
@@ -18,6 +19,7 @@ class BlogPostDetialApiSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = PostApiModel
+        read_only = True
         fields = ['id','author_id','author_name',
                   'author_email','title','overview',
                   'content','published_at','comments']
