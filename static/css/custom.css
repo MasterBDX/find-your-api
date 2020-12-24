@@ -8,7 +8,7 @@
 body{
   background-color: #7461FF08;
   font-family: 'Sniglet', cursive;
-  font-size: 1.3em;
+  font-size: 1.3rem;
   
 }
 a{
@@ -71,7 +71,7 @@ a{
 .detail-section .row  pre code 
 {
   font-family: 'Source Code Pro', monospace;
-  font-size: 1.3em;
+  font-size: 18px;
   padding: 20px;
   border-radius: 7px;
 }
@@ -103,7 +103,7 @@ body, .sticky-footer-wrapper {
   margin-bottom: -10px;
 }
 .third-section pre code{
-  font-size: 1.2rem;
+  font-size: 18px;
   border-radius: 13px;
 }
 
@@ -149,3 +149,13 @@ body, .sticky-footer-wrapper {
   color : var(--myWhight);
 }
 
+/* Support Section */
+footer .support .image-container{
+  width: 169px;
+  margin: auto;
+}
+
+footer .support .image-container img{
+  width:100% ;
+
+}

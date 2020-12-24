@@ -27,7 +27,9 @@ class TestPostsAPIViews(TestCase):
         self.post = create_post(self.data)
 
         self.list_url = reverse('posts:api-list')
-        self.retrieve_url = reverse('posts_api:api-detail',kwargs={'pk':self.post.id})
+        self.retrieve_url = reverse('posts:api-detail',kwargs={'pk':self.post.id})
+        self.search_url = reverse('posts:api-search')
+        self.random_url = reverse('posts:api-random')
 
     def test_viewset_list_method(self):
         for _ in range(3):
@@ -71,3 +73,28 @@ class TestPostsAPIViews(TestCase):
         response = self.client.delete(self.retrieve_url)
 
         self.assertEqual(response.status_code,200)
+    
+    def test_search_view(self):
+        data2 = {
+                     'author_id':2,'author_name':'test_name 2',
+                     'author_email':'test2@mail.com','title':'Test Title 2',
+                     'overview':'Test OverView Short Overview 2',
+                     'content':'Test Content Long Content 2',
+        
+                     }
+        post2 = create_post(data2)
+        response = self.client.get(self.search_url,data={'search':'test2@mail.com'})
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(len(response.data),1)
+        self.assertEqual(response.data[0]['author_email'],data2['author_email'])
+
+
+    def test_random_view(self):
+        for _ in range(30):
+            create_post(self.data)
+        response = self.client.get(self.random_url)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(len(response.data),20)
+        response2 = self.client.get(self.random_url,data={'limit':'5'})
+        self.assertEqual(response2.status_code,200)
+        self.assertEqual(len(response2.data),5)

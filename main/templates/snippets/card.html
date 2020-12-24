@@ -5,7 +5,7 @@
     <div class="card-body">
       <h5 class="card-title">{{api.name|capfirst}} API Guide</h5>
       <p class="card-text">
-        {{api.overview}}  
+        {{api.overview|safe}}  
       </p>
       <a href="{% url 'main:detail' slug=api.slug %}" class="btn btn-color">
         View Guide</a>

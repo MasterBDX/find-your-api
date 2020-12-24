@@ -1,13 +1,28 @@
+{% load static %}
 <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
     <div class="container text-center">
-      <small>
-        &copy; Copyright 2020 All Rights Reserved For {{title}} 
-      </small>
-      <br />
-      <small class="footer-small">This Website coded with love by 
-        <a href="{{portfolio_url}}">
-          MasterBDX
-        </a>
-        </small>
+      <div class="row">
+        <div class="col-md-6">
+            <small>
+              &copy; Copyright 2020 All Rights Reserved For {{title}} 
+            </small>
+            <br />
+            <small class="footer-small">This Website coded with love by 
+              <a href="{{portfolio_url}}">
+                MasterBDX
+              </a>
+              </small>
+        </div>
+        <div class="col-md-6 support text-center">
+            Small support make a huge change
+            <br />
+            <div class="image-container mt-3">
+            <a href="https://ko-fi.com/masterbdx" 
+               class="">
+                 <img src="{% static 'images/kofi4_small.jpg' %}" />
+                </a>
+              </div>
+        </div>
+      </div>
     </div>
   </footer>

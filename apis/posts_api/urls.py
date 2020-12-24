@@ -11,8 +11,8 @@ router.register('',PostAPIViewSet,basename='api')
 app_name = 'posts_api'
 
 urlpatterns = [
-        path('search/',PostsSearchAPIView.as_view(),name='search'),
-        path('random/',PostsRandomAPIView.as_view(),name='random'),
+        path('search/',PostsSearchAPIView.as_view(),name='api-search'),
+        path('random/',PostsRandomAPIView.as_view(),name='api-random'),
         path('',include(router.urls)),
         ]
 
