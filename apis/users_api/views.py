@@ -86,7 +86,7 @@ class UsersSearchAPIView(ListAPIView):
     filter_backends =[filters.SearchFilter]
     search_fields = ['=id','username', '=email',
                       'full_name','=birth_place',
-                     '=phone_number','address','birthday']
+                     'phone_number','address','birthday']
     
 
 class UsersRandomAPIView(ListAPIView):
