@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block title %}
 {{guide.name}} API Guide 
 {% endblock  %}
@@ -20,6 +20,20 @@
               {{guide.safe_content}} 
           </p>
         
+        </div>
+        <div class="col-lg-8 m-auto text-center support-btn-container">
+          <h2>Help us to grow up with this project</h2>  
+          <p class="mb-3">
+              If you find my work useful, or helped you in some way.
+              It would mean a lot to me if you could write a message on my wall
+              and share a cup of coffee with me 
+              <br />
+              (Remember maybe Small support make a huge change). 
+            </p>
+            <a href="https://ko-fi.com/masterbdx" 
+            class="mt-3">
+              <img src="{% static 'images/kofi4_small.png' %}" />
+             </a>
         </div>
         <div class="col-lg-10 m-auto detail-try-container">
           <hr />

@@ -150,6 +150,12 @@ body, .sticky-footer-wrapper {
 }
 
 /* Support Section */
+.support-btn-container {
+  background-color: #2dcc7078;
+  border-radius: 12px;
+  padding: 19px;
+}
+
 footer .support .image-container{
   width: 169px;
   margin: auto;
@@ -159,3 +165,5 @@ footer .support .image-container img{
   width:100% ;
 
 }
+
+
