@@ -84,8 +84,9 @@ class UsersSearchAPIView(ListAPIView):
     queryset = UserApiModel.objects.all()
     serializer_class = UserApiSerializer
     filter_backends =[filters.SearchFilter]
-    search_fields = ['id','username', 'email','full_name','birth_place',
-                     'phone_number','address','birthday']
+    search_fields = ['=id','username', '=email',
+                      'full_name','=birth_place',
+                     '=phone_number','address','birthday']
     
 
 class UsersRandomAPIView(ListAPIView):

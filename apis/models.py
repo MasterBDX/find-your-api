@@ -13,7 +13,7 @@ class UserApiModel(models.Model):
     birthday = models.DateField()
     birth_place = models.CharField(max_length=255)
     email = models.EmailField()
-    phone_number = PhoneNumberField()
+    phone_number = PhoneNumberField(default='+12125552368')
     address = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
