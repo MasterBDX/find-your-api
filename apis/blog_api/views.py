@@ -11,7 +11,7 @@ from .serializers import (
                             )
 
 from apis.posts_api.serializers import PostApiSerializer
-from apis.vars import ALLOWED_POST_FIELDS
+from apis.posts_api.views import ALLOWED_ORDERING_FIELDS
 
 from ..models import PostApiModel,CommentApiModel
 from ..comments_api.serializers import CommentApiSerializer
@@ -22,7 +22,7 @@ class PaginatedPostsListAPIView(generics.ListAPIView):
     serializer_class = PostApiSerializer
     filter_backends =[filters.SearchFilter,filters.OrderingFilter]
     
-    ordering_fields = ALLOWED_POST_FIELDS
+    ordering_fields = ALLOWED_ORDERING_FIELDS
     pagination_class = BasicPagination
         
     

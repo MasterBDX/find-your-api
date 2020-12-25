@@ -20,7 +20,8 @@ from ..global_utils import (
                      clean_pk,
                      get_limit)
 
-from ..vars import ALLOWED_POST_FIELDS
+
+ALLOWED_ORDERING_FIELDS = ['id','title','author_id','author_name']
 
 class PostAPIViewSet(viewsets.ViewSet):
     '''  Viewset to handle GET POST PUT PATCH DELETE requests for
@@ -30,8 +31,9 @@ class PostAPIViewSet(viewsets.ViewSet):
 
     def list(self, request):
         limit = get_limit(request.GET)
+        
         ordering = check_ordering_kwarg(request.GET.get('ordering'),
-                                        ALLOWED_POST_FIELDS)                              
+                                        ALLOWED_ORDERING_FIELDS)                              
         if ordering:
             queryset = PostApiModel.objects.order_by(ordering)
         else:

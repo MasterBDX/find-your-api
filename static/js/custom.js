@@ -1,7 +1,11 @@
 $(function(){
     
     // Url Validation ----------------------------
-
+    const spinnerIcon = `
+    <div style="">
+        <i style="color:#29cd71" class="fas fa-sync fa-lg fa-pulse"></i>
+    </div>
+        `
     function validURL(str) {
         // check if string is valid url --------------        
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -51,18 +55,24 @@ $(function(){
     
     $('#run-btn').click(function(e){
         e.preventDefault();
+        let jsonContainer = $('#json-holder')
         let url = $('#url-holder').text()
-       
+        jsonContainer.html(spinnerIcon)
         fetch(url)
         .then(response => response.json())
         .then(json => {
-            
-            $('#json-holder').html(JSON.stringify(json, null, "  "))
+            jsonContainer.empty()
+            jsonContainer.html(JSON.stringify(json, null, "  "))
             hljs.initHighlighting.called = false;
             hljs.initHighlighting();
             })
         .catch((error) => {
                 console.error('Error:', error);
+                jsonContainer.html(`
+                    <div style="color:#ff5d5a">
+                        ${error}                        
+                    </div>
+                `)
                         });
     })
 
