@@ -76,7 +76,7 @@ class CommentsSearchAPIView(ListAPIView):
     serializer_class = CommentApiSerializer
     filter_backends =[filters.SearchFilter]
     search_fields = [
-                     '=id','=email','=created_at',
+                     '=id','=email',
                      'content','username',
                      ]
 
